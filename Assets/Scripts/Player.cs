@@ -1,86 +1,132 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance { get; private set; }
+
+    public delegate void StatsEvent(StatType type, float value, float oldValue);
+
+    [Serializable]
+    public enum StatType
+    {
+        Hotness,
+        Chimney,
+        Plumbing,
+        Kitchen,
+        Boiler
+    }
+
+    [Serializable]
+    public struct Stat
+    {
+        [SerializeField]
+        private float _StartValue;
+        public float StartValue { get { return _StartValue; } }
+
+        [SerializeField, HideInInspector]
+        private StatType _Type;
+        public StatType Type { get { return _Type; } }
+
+        private float _Value;
+        public float Value
+        {
+            get { return _Value; }
+            set
+            {
+                value = Mathf.Clamp(value, 0f, 1f);
+                if (!Mathf.Approximately(value, _Value))
+                {
+                    OnStatChanged?.Invoke(_Type, value, _Value);
+                    _Value = value;
+                }
+            }
+        }
+
+        public Stat(float start, StatType type)
+        {
+            _StartValue = Mathf.Clamp(start, 0f, 1f);
+            _Value = _StartValue;
+            _Type = type;
+        }
+    }
+
     [Header("Temperature")]
     [Space]
 
     [SerializeField]
-    private float maxTemperature = 100;
-    [SerializeField]
-    private float minTemperature = 0;
-    [SerializeField]
-    private float startTemperature = 50;
-    [SerializeField]
-    private float tempDecreaseSpeed = 1;
-
+    private Stat temperatureStat = new Stat(0.5f, StatType.Hotness);
+    public static Stat TemperatureStat => instance.kitchenStat;
 
     [Header("Chimney Level")]
     [Space]
 
     [SerializeField]
-    private float maxChimneyLevel = 100;
-    [SerializeField]
-    private float minChimneyLevel = 0;
-    [SerializeField]
-    private float startChimneyLevel = 50;
+    private Stat chimneyStat = new Stat(0.5f, StatType.Chimney);
+    public static Stat ChimneyStat => instance.kitchenStat;
 
     [Header("Plumbing Level")]
     [Space]
 
     [SerializeField]
-    private float maxPlumbingLevel = 100;
-    [SerializeField]
-    private float minPlumbingLevel = 0;
-    [SerializeField]
-    private float startPlumbingLevel = 50;
+    private Stat plumbingStat = new Stat(0.5f, StatType.Plumbing);
+    public static Stat PlumbingStat => instance.kitchenStat;
 
     [Header("Kitchen Level")]
     [Space]
 
     [SerializeField]
-    private float maxKitchenLevel = 100;
-    [SerializeField]
-    private float minKitchenLevel = 0;
-    [SerializeField]
-    private float startKitchenLevel = 50;
+    private Stat kitchenStat = new Stat(0.5f, StatType.Kitchen);
+    public static Stat KitchenStat => instance.kitchenStat;
 
     [Header("Boiler Level")]
     [Space]
 
     [SerializeField]
-    private float maxBoilerLevel = 100;
-    [SerializeField]
-    private float minBoilerLevel = 0;
-    [SerializeField]
-    private float startBoilerLevel = 50;
+    private Stat boilerStat = new Stat(0.5f, StatType.Boiler);
+    public static Stat BoilerStat => instance.kitchenStat;
 
     [Header("Player levels")]
     [Space]
 
-    [SerializeField]
-    private float tempLevel;
-    [SerializeField]
-    private float chimneyLevel;
-    private float plumbingLevel;
-    private float kitchenLevel;
-    private float boilerLevel;
+    public static StatsEvent OnStatChanged;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        tempLevel = startTemperature;
-        chimneyLevel    = startChimneyLevel;
-        plumbingLevel   = startPlumbingLevel;
-        kitchenLevel    = kitchenLevel;
-        boilerLevel     = boilerLevel;
+        instance = this;
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            temperatureStat.Value += ShiftedValue(0.1f);
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            chimneyStat.Value += ShiftedValue(0.1f);
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            plumbingStat.Value += ShiftedValue(0.1f);
+        }
+        else if (Input.GetKeyDown(KeyCode.R))
+        {
+            kitchenStat.Value += ShiftedValue(0.1f);
+        }
+        else if (Input.GetKeyDown(KeyCode.T))
+        {
+            boilerStat.Value += ShiftedValue(0.1f);
+        }
+    }
 
+    float ShiftedValue(float value)
+    {
+        return (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ? -value : value;
     }
 }

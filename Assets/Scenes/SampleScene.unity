@@ -1236,6 +1236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 655278571}
   - component: {fileID: 655278572}
+  - component: {fileID: 655278573}
   m_Layer: 5
   m_Name: RepairZone
   m_TagString: Untagged
@@ -1272,6 +1273,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655278570}
   m_CullTransparentMesh: 0
+--- !u!114 &655278573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655278570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 975c89bcfe207244eab1571ff5a23007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _LowerThreshold: 0.2
+  _LowValueColor: {r: 1, g: 0, b: 0, a: 1}
+  _NormalValueColor: {r: 1, g: 1, b: 1, a: 1}
+  _MaxValueColor: {r: 0, g: 1, b: 0, a: 1}
+  Chimney: {fileID: 1925367977}
+  Plumbing: {fileID: 1342649061}
+  Kitchen: {fileID: 865090456}
+  Boiler: {fileID: 72545421}
 --- !u!1 &660178635
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,7 +1724,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.8724814e+31, y: 229.4471, z: 1.08356874e+24, w: 0.0000000010785604}
+  m_BoundingSphereOverride: {x: 6.82e-43, y: -4.5605733e+36, z: 6.81e-43, w: -65.49603}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3793,6 +3814,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925367975}
   m_CullTransparentMesh: 0
+--- !u!1 &2079922225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079922227}
+  - component: {fileID: 2079922226}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2079922226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079922225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de5b2216b7c684f45963821950276b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperatureStat:
+    _StartValue: 0.5
+    _Type: 0
+  chimneyStat:
+    _StartValue: 0.5
+    _Type: 1
+  plumbingStat:
+    _StartValue: 0.5
+    _Type: 2
+  kitchenStat:
+    _StartValue: 0.5
+    _Type: 3
+  boilerStat:
+    _StartValue: 0.5
+    _Type: 4
+--- !u!4 &2079922227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079922225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2132087367
 GameObject:
   m_ObjectHideFlags: 0
