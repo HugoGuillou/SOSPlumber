@@ -47,7 +47,7 @@ public class Game : MonoBehaviour
         //Genders.Add("NB");
         imagePaths = new List<string>();
 
-        GameObject[] resourcesImagePrefabs = Resources.LoadAll<GameObject>("Personnages") as GameObject[];
+        GameObject[] resourcesImagePrefabs = Resources.LoadAll<GameObject>("Personnages/Canvas") as GameObject[];
         ImagePrefabs = new List<GameObject>(resourcesImagePrefabs);
         Debug.Log(ImagePrefabs[1]);
 
