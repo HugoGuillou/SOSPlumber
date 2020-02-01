@@ -106,6 +106,9 @@ public class Game : MonoBehaviour
     //https://forum.unity.com/threads/swipe-in-all-directions-touch-and-mouse.165416/
     public void Swipe()
     {
+        if (!currentCard)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             //save began touch 2d point
@@ -151,12 +154,13 @@ public class Game : MonoBehaviour
     void SwipeRight()
     {
         StartCoroutine(sweepRight(currentCard.transform));
+        currentCard = null;
     }
 
     void SwipeLeft()
     {
         StartCoroutine(sweepLeft(currentCard.transform));
-
+        currentCard = null;
     }
 
     void NextCard()
@@ -167,28 +171,25 @@ public class Game : MonoBehaviour
 
     IEnumerator sweepRight(Transform tr)
     {
-        while (tr.position.x <= 700)
+        while (tr.localPosition.x <= 600)
         {
             tr.Translate(Vector3.right * 80f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
-        Destroy(tr.gameObject);
         NextCard();
         Debug.Log("Card gone"); 
     }
 
     IEnumerator sweepLeft(Transform tr)
     {
-        while (tr.position.x >= -700)
+        while (tr.localPosition.x >= -600)
         {
             tr.Translate(Vector3.left * 80f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
-        Destroy(tr.gameObject);
         NextCard();
-
         Debug.Log("Card gone");
     }
 }

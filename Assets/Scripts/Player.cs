@@ -17,16 +17,45 @@ public class Player : MonoBehaviour
     private float tempDecreaseSpeed = 1;
 
 
-    [Header("House Level")]
+    [Header("Chimney Level")]
     [Space]
 
     [SerializeField]
-    private float maxHouseLevel = 100;
+    private float maxChimneyLevel = 100;
     [SerializeField]
-    private float minHouseLevel = 0;
+    private float minChimneyLevel = 0;
     [SerializeField]
-    private float startHouseLevel = 50;
+    private float startChimneyLevel = 50;
 
+    [Header("Plumbing Level")]
+    [Space]
+
+    [SerializeField]
+    private float maxPlumbingLevel = 100;
+    [SerializeField]
+    private float minPlumbingLevel = 0;
+    [SerializeField]
+    private float startPlumbingLevel = 50;
+
+    [Header("Kitchen Level")]
+    [Space]
+
+    [SerializeField]
+    private float maxKitchenLevel = 100;
+    [SerializeField]
+    private float minKitchenLevel = 0;
+    [SerializeField]
+    private float startKitchenLevel = 50;
+
+    [Header("Boiler Level")]
+    [Space]
+
+    [SerializeField]
+    private float maxBoilerLevel = 100;
+    [SerializeField]
+    private float minBoilerLevel = 0;
+    [SerializeField]
+    private float startBoilerLevel = 50;
 
     [Header("Player levels")]
     [Space]
@@ -34,20 +63,24 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float tempLevel;
     [SerializeField]
-    private float houseLevel;
+    private float chimneyLevel;
+    private float plumbingLevel;
+    private float kitchenLevel;
+    private float boilerLevel;
 
     // Start is called before the first frame update
     void Start()
     {
         tempLevel = startTemperature;
-        houseLevel= startHouseLevel;
+        chimneyLevel    = startChimneyLevel;
+        plumbingLevel   = startPlumbingLevel;
+        kitchenLevel    = kitchenLevel;
+        boilerLevel     = boilerLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        houseLevel -= tempDecreaseSpeed * Time.deltaTime;
 
     }
 }
