@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Card : MonoBehaviour
 {
@@ -34,10 +36,31 @@ public class Card : MonoBehaviour
     private int sexyStat;
 
     [SerializeField]
-    private int repairStat;
+    private int chimneyStat;
 
     [SerializeField]
-    private Texture2D image;
+    private int kitchenStat;
+
+    [SerializeField]
+    private int boilerStat;
+
+    [SerializeField]
+    private int plumbryStat;
+
+    [SerializeField]
+    private Sprite sprite;
+
+    [SerializeField]
+    private Image imageComponent;
+
+    [SerializeField]
+    private TextMeshProUGUI nameComponent;
+
+    [SerializeField]
+    private TextMeshProUGUI hotnessComponent;
+
+    [SerializeField]
+    private TextMeshProUGUI repairComponent;
 
     // Start is called before the first frame update
     void Start()
@@ -56,17 +79,44 @@ public class Card : MonoBehaviour
         OnCardAccepted(this);
     }
 
-    public void DisCard()
+    public void DisCard() //lololololol
     {
         OnCardDiscarded(this);
     }
 
-    public void SetAllData(string n, string q, int s, int r, Texture2D i)
+    public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, Sprite i)
     {
         name = n;
         quote = q;
         sexyStat = s;
-        repairStat = r;
-        image = i;
+        chimneyStat = cs;
+        plumbryStat = ps;
+        kitchenStat = ks;
+        boilerStat  = bs;
+        sprite = i;
+
+        // Set image
+        //Image cardImage = transform.Find("InCard/CharacterSprite").GetComponent<Image>();
+        imageComponent.sprite = sprite;
+
+        //Set name
+        //Text cardName = transform.Find("Background/CharacterName").GetComponent<Text>();
+        nameComponent.text = name;
+
+        //Set hotness points
+        String sexyStr = "";
+        if (sexyStat > 0)
+            sexyStr += "+";
+        sexyStr += sexyStat.ToString();
+        //TextMesh cardHotness = transform.Find("StatsContainer/HotnessContener/HotnesIcon/HotnessPoint").GetComponent<TextMesh>();
+        hotnessComponent.text = sexyStr;
+        
+        //Set repair points
+        String repairStr = "";
+        if (plumbryStat > 0)
+            repairStr += "+";
+        repairStr += plumbryStat.ToString();
+        //TextMesh cardRepair = transform.Find("StatsContainer/RepairContener/RepairIcon/RepairPoint").GetComponent<TextMesh>();
+        repairComponent.text = repairStr;
     }
 }
