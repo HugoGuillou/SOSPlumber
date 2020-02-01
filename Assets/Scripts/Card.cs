@@ -6,10 +6,10 @@ public class Card : MonoBehaviour
 {
 
     [SerializeField]
-    private string text;
+    private string quote;
 
     [SerializeField]
-    private string Name;
+    private string name;
 
     [SerializeField]
     private int sexyStat;
@@ -30,5 +30,14 @@ public class Card : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetAllData(string n, string q, int s, int r, Texture2D i)
+    {
+        name = n;
+        quote = q;
+        sexyStat = s;
+        repairStat = r;
+        image = i;
     }
 }
