@@ -943,6 +943,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HousePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8819146937411065671, guid: 31979e12504a3a840bda17dc3a5bbdcc,
+        type: 3}
+      propertyPath: _LowerThreshold
+      value: 0.314
+      objectReference: {fileID: 0}
     - target: {fileID: 9060850940808389234, guid: 31979e12504a3a840bda17dc3a5bbdcc,
         type: 3}
       propertyPath: m_AnchorMax.x
