@@ -41,6 +41,9 @@ public class Game : MonoBehaviour
 
         Quotes = new List<string>();
         Genders = new List<string>();
+        Genders.Add("M");
+        Genders.Add("F");
+        Genders.Add("NB");
         imagePaths = new List<string>();
 
         RetrieveFromCSV(csvFile);
@@ -48,8 +51,6 @@ public class Game : MonoBehaviour
 
         // Prepare our first card
         currentCard = Deck.Dequeue();
-        currentCard.GetComponent<SpriteRenderer>().sortingOrder = 1;
-
     }
 
     // Update is called once per frame
@@ -69,7 +70,31 @@ public class Game : MonoBehaviour
         {
             GameObject cardGO = Instantiate(cardPrefab, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
             Card ourCard = cardGO.GetComponent<Card>();
-            ourCard.GetComponent<BoxCollider2D>().enabled = false;
+
+            int randGender = (int)Random.Range(0, 2);
+            string gender = Genders[randGender];
+
+            int randName = (int)Random.Range(0, Names[gender].Count-1);
+            string name = Names[gender][randName];
+
+            int randQuote = (int)Random.Range(0, Quotes.Count-1);
+            Debug.Log(randQuote);
+            string quote = Quotes[randQuote];
+
+            int randImage = (int)Random.Range(0, imagePaths.Count - 1);
+            string imagePath = imagePaths[randQuote];
+            //Sprite image = Resources.Load(imagePath) as Sprite;
+            Sprite image = Resources.Load<Sprite>("wink");
+            // A CHANGER QUAND LES MODIFS DANS PLAYER SERONT PUSHÉS //////////////////////////////////
+            int sexyStat    = Random.Range(-10, 10);
+            int chimneyStat = Random.Range(-10, 10);
+            int plumbryStat = Random.Range(-10, 10);
+            int kitchenStat = Random.Range(-10, 10);
+            int boilerStat  = Random.Range(-10, 10);
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            ourCard.SetAllData(name, quote, sexyStat, chimneyStat, plumbryStat, kitchenStat, boilerStat, image);
+
+            ourCard.transform.SetAsFirstSibling();
             ourDeck.Enqueue(ourCard);
         }
 
@@ -96,7 +121,7 @@ public class Game : MonoBehaviour
             string debugLine = imagePath + ", " + name + ", " + quote + ", " + gender;
 
             imagePaths.Add(imagePath);
-            Names[gender].Add(gender);
+            Names[gender].Add(name);
             Quotes.Add(quote);
 
         }
@@ -165,15 +190,15 @@ public class Game : MonoBehaviour
 
     void NextCard()
     {
-        currentCard = Deck.Dequeue();
-        currentCard.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        if(Deck.Count > 0)
+            currentCard = Deck.Dequeue();
     }
 
     IEnumerator sweepRight(Transform tr)
     {
         while (tr.localPosition.x <= 600)
         {
-            tr.Translate(Vector3.right * 80f * Time.deltaTime);
+            tr.Translate(Vector3.right * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
@@ -185,7 +210,7 @@ public class Game : MonoBehaviour
     {
         while (tr.localPosition.x >= -600)
         {
-            tr.Translate(Vector3.left * 80f * Time.deltaTime);
+            tr.Translate(Vector3.left * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
