@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc698f5c6e58aab4fb947b58800b5604, type: 3}
+  m_Name: GameSounds
+  m_EditorClassIdentifier: 
+  _MenuMusic: {fileID: 0}
+  _GameMusic: {fileID: 0}
+  _SwipeSound: {fileID: 0}
+  _AcceptSound: {fileID: 0}
+  _DeclineSound: {fileID: 0}
+  _NewCharSound: {fileID: 0}
+  _DingDongSound: {fileID: 0}
+  _TextSound: {fileID: 0}
+  _CardFlipSound: {fileID: 0}

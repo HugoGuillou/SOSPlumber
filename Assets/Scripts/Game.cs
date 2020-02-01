@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
     private List<string> Genders;
     private List<string> Quotes;
     private List<string> imagePaths;
+    private List<GameObject> ImagePrefabs;
 
     private Queue<Card> Deck;
     private Card currentCard;
@@ -43,10 +44,15 @@ public class Game : MonoBehaviour
         Genders = new List<string>();
         Genders.Add("M");
         Genders.Add("F");
-        Genders.Add("NB");
+        //Genders.Add("NB");
         imagePaths = new List<string>();
 
+        GameObject[] resourcesImagePrefabs = Resources.LoadAll<GameObject>("Personnages/Canvas") as GameObject[];
+        ImagePrefabs = new List<GameObject>(resourcesImagePrefabs);
+        Debug.Log(ImagePrefabs[1]);
+
         RetrieveFromCSV(csvFile);
+          
         Deck = GenerateDeck(deckSize);
 
         // Prepare our first card
@@ -71,20 +77,25 @@ public class Game : MonoBehaviour
             GameObject cardGO = Instantiate(cardPrefab, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
             Card ourCard = cardGO.GetComponent<Card>();
 
-            int randGender = (int)Random.Range(0, 2);
+            int randGender = Random.Range(0, Genders.Count);
             string gender = Genders[randGender];
 
-            int randName = (int)Random.Range(0, Names[gender].Count-1);
+            int randName = Random.Range(0, Names[gender].Count);
+            Debug.Log(randName+ " " + Names[gender].Count);
             string name = Names[gender][randName];
 
-            int randQuote = (int)Random.Range(0, Quotes.Count-1);
+            int randQuote = Random.Range(0, Quotes.Count);
             Debug.Log(randQuote);
             string quote = Quotes[randQuote];
 
-            int randImage = (int)Random.Range(0, imagePaths.Count - 1);
-            string imagePath = imagePaths[randQuote];
+            //int randImage = (int)Random.Range(0, imagePaths.Count - 1);
+            //string imagePath = imagePaths[randQuote];
             //Sprite image = Resources.Load(imagePath) as Sprite;
-            Sprite image = Resources.Load<Sprite>("wink");
+            //Sprite image = Resources.Load<Sprite>("wink");
+
+            int randImage = Random.Range(0, ImagePrefabs.Count);
+            GameObject imagePrefab = ImagePrefabs[randImage];
+
             // A CHANGER QUAND LES MODIFS DANS PLAYER SERONT PUSHÉS //////////////////////////////////
             int sexyStat    = Random.Range(-10, 10);
             int chimneyStat = Random.Range(-10, 10);
@@ -92,7 +103,7 @@ public class Game : MonoBehaviour
             int kitchenStat = Random.Range(-10, 10);
             int boilerStat  = Random.Range(-10, 10);
             ///////////////////////////////////////////////////////////////////////////////////////////
-            ourCard.SetAllData(name, quote, sexyStat, chimneyStat, plumbryStat, kitchenStat, boilerStat, image);
+            ourCard.SetAllData(name, quote, sexyStat, chimneyStat, plumbryStat, kitchenStat, boilerStat, imagePrefab);
 
             ourCard.transform.SetAsFirstSibling();
             ourDeck.Enqueue(ourCard);
@@ -119,6 +130,8 @@ public class Game : MonoBehaviour
             string gender    = lineData[3];
 
             string debugLine = imagePath + ", " + name + ", " + quote + ", " + gender;
+
+            Debug.Log(debugLine);
 
             imagePaths.Add(imagePath);
             Names[gender].Add(name);
