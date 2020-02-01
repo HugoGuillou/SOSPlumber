@@ -836,24 +836,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5b2216b7c684f45963821950276b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTemperature: 100
-  minTemperature: 0
-  startTemperature: 50
-  tempDecreaseSpeed: 1
-  maxChimneyLevel: 100
-  minChimneyLevel: 0
-  startChimneyLevel: 50
-  maxPlumbingLevel: 100
-  minPlumbingLevel: 0
-  startPlumbingLevel: 50
-  maxKitchenLevel: 100
-  minKitchenLevel: 0
-  startKitchenLevel: 50
-  maxBoilerLevel: 100
-  minBoilerLevel: 0
-  startBoilerLevel: 50
-  tempLevel: 0
-  chimneyLevel: 0
+  temperatureStat:
+    _StartValue: 0.5
+    _Type: 0
+  chimneyStat:
+    _StartValue: 0.5
+    _Type: 1
+  plumbingStat:
+    _StartValue: 0.5
+    _Type: 2
+  kitchenStat:
+    _StartValue: 0.5
+    _Type: 3
+  boilerStat:
+    _StartValue: 0.5
+    _Type: 4
 --- !u!4 &320072233
 Transform:
   m_ObjectHideFlags: 0
@@ -1764,7 +1761,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 7.45e-43, y: 0, z: 7.45e-43, w: 2.0706e-41}
+  m_BoundingSphereOverride: {x: 6.7110867e+22, y: 7.1546075e+22, z: 1.1577061e+27,
+    w: 1.707776e+19}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

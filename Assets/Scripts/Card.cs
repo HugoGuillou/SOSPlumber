@@ -48,10 +48,10 @@ public class Card : MonoBehaviour
     private int plumbryStat;
 
     [SerializeField]
-    private Sprite sprite;
+    private GameObject imagePrefab;
 
     [SerializeField]
-    private Image imageComponent;
+    private Transform imageParent;
 
     [SerializeField]
     private TextMeshProUGUI nameComponent;
@@ -84,7 +84,7 @@ public class Card : MonoBehaviour
         OnCardDiscarded(this);
     }
 
-    public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, Sprite i)
+    public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, GameObject ip)
     {
         name = n;
         quote = q;
@@ -93,11 +93,11 @@ public class Card : MonoBehaviour
         plumbryStat = ps;
         kitchenStat = ks;
         boilerStat  = bs;
-        sprite = i;
+        //sprite = i;
 
         // Set image
         //Image cardImage = transform.Find("InCard/CharacterSprite").GetComponent<Image>();
-        imageComponent.sprite = sprite;
+        imagePrefab = Instantiate(ip, imageParent);
 
         //Set name
         //Text cardName = transform.Find("Background/CharacterName").GetComponent<Text>();
