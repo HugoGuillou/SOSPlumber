@@ -83,7 +83,22 @@ public class Game : MonoBehaviour
         // Prepare our first card
         Card.current = Deck.Dequeue();
 
-        gameState = GameState.DoorClosed;
+        gameState = GameState.DoorOpen;
+
+        Player.OnStatChanged += StatsUpdated;
+    }
+
+
+    public void StatsUpdated(Player.StatType type, float hotness, float oldHotness)
+    {
+        if (hotness > 1)
+            hotness = 1;
+
+        System.Array statTypes = System.Enum.GetValues(typeof(Player.StatType));
+        foreach (Player.StatType statType in statTypes)
+        {
+            
+        }
     }
 
     // Update is called once per frame
@@ -290,7 +305,7 @@ public class Game : MonoBehaviour
             DoorCard.localScale = doorScale;
             yield return new WaitForEndOfFrame();
         }
-
+        
         DoorCard.gameObject.SetActive(false);
 
         Vector3 currentCardScale = Card.current.transform.localScale;
