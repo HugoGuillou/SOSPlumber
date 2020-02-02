@@ -70,12 +70,12 @@ public class Card : MonoBehaviour
 
     public void AcceptCard()
     {
-        OnCardAccepted(this);
+        OnCardAccepted?.Invoke(this);
     }
 
     public void DisCard()
     {
-        OnCardDiscarded(this);
+        OnCardDiscarded?.Invoke(this);
     }
 
     public string GetQuote()
