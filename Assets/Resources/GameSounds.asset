@@ -29,7 +29,6 @@ MonoBehaviour:
   _AcceptSounds:
     _Pool:
     - {fileID: 0}
-    - {fileID: 0}
     _Type: 1
   _DeclineSounds:
     _Pool:
