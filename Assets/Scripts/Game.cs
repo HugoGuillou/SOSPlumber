@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using DG.Tweening;
 
 public class Game : MonoBehaviour
 {
@@ -26,10 +28,32 @@ public class Game : MonoBehaviour
     [SerializeField]
     private Transform deckPlaceHolder;
 
+    [SerializeField]
+    private Transform DialogBubble;
+
+    [SerializeField]
+    private float bubblePopSpeed = 1;
+
     //swipe detection class
     private Vector2 firstPressPos;
     private Vector2 secondPressPos;
     private Vector2 currentSwipe;
+
+    private enum GameState{
+        DoorClosed,
+        DoorOpen
+    }
+
+    private enum Swipe
+    {
+        Left,
+        Right,
+        None
+    }
+    private GameState gameState;
+
+    [SerializeField]
+    private Transform DoorCard;
 
     // Start is called before the first frame update
     void Start()
@@ -57,16 +81,33 @@ public class Game : MonoBehaviour
 
         // Prepare our first card
         currentCard = Deck.Dequeue();
+
+        gameState = GameState.DoorClosed;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Swipe();
+        Swipe swipeDir = GetSwipe();
+
+        if(gameState == GameState.DoorOpen)
+        {
+            if (swipeDir == Swipe.Left)
+                SwipeLeft();
+            else if (swipeDir == Swipe.Right)
+                SwipeRight();
+        }
+
+        else if(gameState == GameState.DoorClosed)
+        {
+            if(swipeDir != Swipe.None)
+            {
+                StartCoroutine(DrawCardAnim());
+            }
+        }
 
     }
-
 
     Queue<Card> GenerateDeck(int size)
     {
@@ -107,6 +148,10 @@ public class Game : MonoBehaviour
 
             ourCard.transform.SetAsFirstSibling();
             ourDeck.Enqueue(ourCard);
+
+            Vector3 newScale = ourCard.transform.localScale;
+            newScale.x = 0;
+            ourCard.transform.localScale = newScale;
         }
 
         return ourDeck;
@@ -142,10 +187,8 @@ public class Game : MonoBehaviour
     }
 
     //https://forum.unity.com/threads/swipe-in-all-directions-touch-and-mouse.165416/
-    public void Swipe()
+    private Swipe GetSwipe()
     {
-        if (!currentCard)
-            return;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -179,33 +222,90 @@ public class Game : MonoBehaviour
             //swipe left
             if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
             {
-                SwipeLeft();
+                return Swipe.Left;
             }
             //swipe right
             if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
             {
-                SwipeRight();
+                return Swipe.Right;
+
             }
         }
+
+        return Swipe.None;
     }
 
     void SwipeRight()
     {
         StartCoroutine(sweepRight(currentCard.transform));
-        currentCard = null;
+        //currentCard = null;
     }
 
     void SwipeLeft()
     {
         StartCoroutine(sweepLeft(currentCard.transform));
-        currentCard = null;
+        //currentCard = null;
+
     }
 
     void NextCard()
     {
         if(Deck.Count > 0)
             currentCard = Deck.Dequeue();
+
+        gameState = GameState.DoorClosed;
+
+        // Pop Dialog Bubble
+        //DialogBubble.DOScale(1, 1);
+        StartCoroutine(PopBubble());
+
+        //Set Quote Text
+        TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
+        textMesh.text = currentCard.GetQuote();
+
     }
+
+    IEnumerator DrawCardAnim()
+    {
+
+        Vector3 doorScale = DoorCard.localScale;
+        while (DoorCard.localScale.x > 0)
+        {
+            doorScale.x -= 1 * Time.deltaTime;
+            DoorCard.localScale = doorScale;
+            yield return new WaitForEndOfFrame();
+        }
+
+        DoorCard.gameObject.SetActive(false);
+
+        Vector3 currentCardScale = currentCard.transform.localScale;
+        while (currentCard.transform.localScale.x < 1)
+        {
+            currentCardScale.x += 1 * Time.deltaTime;
+            currentCard.transform.localScale = currentCardScale;
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
+
+    IEnumerator PopBubble()
+    {
+        while(DialogBubble.localScale.x < 1)
+        {
+            DialogBubble.localScale += Vector3.one * bubblePopSpeed * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator DepopBubble()
+    {
+        while (DialogBubble.localScale.x > 0)
+        {
+            DialogBubble.localScale -= Vector3.one * bubblePopSpeed * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
 
     IEnumerator sweepRight(Transform tr)
     {

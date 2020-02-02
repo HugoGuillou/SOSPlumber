@@ -79,9 +79,14 @@ public class Card : MonoBehaviour
         OnCardAccepted(this);
     }
 
-    public void DisCard() //lololololol
+    public void DisCard()
     {
         OnCardDiscarded(this);
+    }
+
+    public string GetQuote()
+    {
+        return quote;
     }
 
     public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, GameObject ip)
