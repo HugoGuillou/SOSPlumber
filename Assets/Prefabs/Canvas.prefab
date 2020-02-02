@@ -32,7 +32,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -75}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4426929316574327653
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvFile: {fileID: 4900000, guid: 3f05b27854ba82843846efbbfde298d7, type: 3}
-  deckSize: 10
+  deckSize: 50
   cardPrefab: {fileID: 370837299135294411, guid: 7eb56d02549e29846a474316ef7d4349,
     type: 3}
   deckPlaceHolder: {fileID: 1539785273}
