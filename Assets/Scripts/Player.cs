@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
         [SerializeField, HideInInspector]
         private StatType _Type;
-        public StatType Type { get { return _Type; } }
+        public StatType Type { get { return _Type; } internal set { _Type = value; } }
 
         private float _Value;
         public float Value
@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
                 value = Mathf.Clamp(value, 0f, 1f);
                 if (!Mathf.Approximately(value, _Value))
                 {
+                    Debug.LogFormat("Stat changed {0} ({1})", _Value, _Type);
                     OnStatChanged?.Invoke(_Type, value, _Value);
                     _Value = value;
                 }
@@ -95,6 +96,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        temperatureStat.Type = StatType.Hotness;
+        chimneyStat.Type = StatType.Chimney;
+        plumbingStat.Type = StatType.Plumbing;
+        kitchenStat.Type = StatType.Kitchen;
+        boilerStat.Type = StatType.Boiler;
     }
 
     private void OnEnable()
@@ -109,6 +115,7 @@ public class Player : MonoBehaviour
 
     void CardAccepted(Card card)
     {
+        Debug.LogFormat("{0} : {1} ({2})", card.SexyStat, card.HouseStat, card.HouseType);
         temperatureStat.Value += card.SexyStat;
         switch (card.HouseType)
         {

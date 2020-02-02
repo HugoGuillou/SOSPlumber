@@ -86,42 +86,6 @@ public class Card : MonoBehaviour
         return quote;
     }
 
-    public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, GameObject ip)
-    {
-        name = n;
-        quote = q;
-        sexyStat = s;
-        //chimneyStat = cs;
-        //plumbryStat = ps;
-        //kitchenStat = ks;
-        //boilerStat  = bs;
-        //sprite = i;
-
-        // Set image
-        //Image cardImage = transform.Find("InCard/CharacterSprite").GetComponent<Image>();
-        imagePrefab = Instantiate(ip, imageParent);
-
-        //Set name
-        //Text cardName = transform.Find("Background/CharacterName").GetComponent<Text>();
-        nameComponent.text = name;
-
-        //Set hotness points
-        String sexyStr = "";
-        if (sexyStat > 0)
-            sexyStr += "+";
-        sexyStr += sexyStat.ToString();
-        //TextMesh cardHotness = transform.Find("StatsContainer/HotnessContener/HotnesIcon/HotnessPoint").GetComponent<TextMesh>();
-        hotnessComponent.text = sexyStr;
-
-        //Set repair points
-        String repairStr = "";
-        if (houseStat > 0f)
-            repairStr += "+";
-        repairStr += ((int)houseStat).ToString();
-        //TextMesh cardRepair = transform.Find("StatsContainer/RepairContener/RepairIcon/RepairPoint").GetComponent<TextMesh>();
-        repairComponent.text = repairStr;
-    }
-
     public void SetAllData(string n, string q, float hotness, Player.StatType type, float stat, GameObject ip)
     {
         name = n;
