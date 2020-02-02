@@ -41,7 +41,8 @@ public class StatPool<T>
 
     public T Pick()
     {
-        return _Pool[UnityEngine.Random.Range(0, _Pool.Count)];
+        //return _Pool[UnityEngine.Random.Range(0, _Pool.Count)];
+        return default;
     }
 }
 
