@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 
+
 public class Game : MonoBehaviour
 {
 
@@ -73,7 +74,6 @@ public class Game : MonoBehaviour
 
         GameObject[] resourcesImagePrefabs = Resources.LoadAll<GameObject>("Personnages/Canvas") as GameObject[];
         ImagePrefabs = new List<GameObject>(resourcesImagePrefabs);
-        Debug.Log(ImagePrefabs[1]);
 
         RetrieveFromCSV(csvFile);
 
@@ -122,11 +122,9 @@ public class Game : MonoBehaviour
             string gender = Genders[randGender];
 
             int randName = Random.Range(0, Names[gender].Count);
-            Debug.Log(randName + " " + Names[gender].Count);
             string name = Names[gender][randName];
 
             int randQuote = Random.Range(0, Quotes.Count);
-            Debug.Log(randQuote);
             string quote = Quotes[randQuote];
 
             //int randImage = (int)Random.Range(0, imagePaths.Count - 1);
@@ -139,12 +137,22 @@ public class Game : MonoBehaviour
 
             // A CHANGER QUAND LES MODIFS DANS PLAYER SERONT PUSHÉS //////////////////////////////////
             int sexyStat = Random.Range(-10, 10);
+            /*
             int chimneyStat = Random.Range(-10, 10);
             int plumbryStat = Random.Range(-10, 10);
             int kitchenStat = Random.Range(-10, 10);
             int boilerStat = Random.Range(-10, 10);
+            */
+
+
+            System.Array statValues = System.Enum.GetValues(typeof(Player.StatType));
+            int randHouseType = Random.Range(0, 4);
+            Player.StatType houseType = (Player.StatType)statValues.GetValue(randHouseType);
+            float houseStat = Random.Range(-0.1f, 0.1f);
+
+            Debug.Log(houseType);
             ///////////////////////////////////////////////////////////////////////////////////////////
-            ourCard.SetAllData(name, quote, sexyStat, chimneyStat, plumbryStat, kitchenStat, boilerStat, imagePrefab);
+            ourCard.SetAllData(name, quote, sexyStat, houseType, houseStat, imagePrefab);
 
             ourCard.transform.SetAsFirstSibling();
             ourDeck.Enqueue(ourCard);
@@ -175,8 +183,6 @@ public class Game : MonoBehaviour
             string gender = lineData[3];
 
             string debugLine = imagePath + ", " + name + ", " + quote + ", " + gender;
-
-            Debug.Log(debugLine);
 
             imagePaths.Add(imagePath);
             Names[gender].Add(name);
@@ -271,7 +277,7 @@ public class Game : MonoBehaviour
         Vector3 doorScale = DoorCard.localScale;
         while (DoorCard.localScale.x > 0)
         {
-            doorScale.x -= 1 * Time.deltaTime;
+            doorScale.x -= 5 * Time.deltaTime;
             DoorCard.localScale = doorScale;
             yield return new WaitForEndOfFrame();
         }
@@ -281,7 +287,7 @@ public class Game : MonoBehaviour
         Vector3 currentCardScale = Card.current.transform.localScale;
         while (Card.current.transform.localScale.x < 1)
         {
-            currentCardScale.x += 1 * Time.deltaTime;
+            currentCardScale.x += 5 * Time.deltaTime;
             Card.current.transform.localScale = currentCardScale;
             yield return new WaitForEndOfFrame();
         }

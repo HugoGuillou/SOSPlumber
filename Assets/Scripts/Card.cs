@@ -22,7 +22,7 @@ public class Card : MonoBehaviour
                 return;
             _current = value;
             if (value != null)
-                OnCurrentCardChanged(_current);
+                OnCurrentCardChanged?.Invoke(_current);
         }
     }
 
