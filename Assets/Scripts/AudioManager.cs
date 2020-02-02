@@ -26,6 +26,8 @@ public class AudioManager : MonoBehaviour
     private static AudioMixerGroup _FeedbackGroup;
     private static AudioMixerGroup _FinGroup;
 
+    private static AudioSource _CurrentMusicSource;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -50,6 +52,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public static void PlayLoop(GameSounds.Sound sound)
+    {
+        Debug.Log(sound.Type);
+        if (sound.Type == GameSounds.SoundType.Music)
+        {
+            if (_CurrentMusicSource != null)
+                instance.StartCoroutine(instance.FadeOut(PlaySound(sound, false, null, null), _CurrentMusicSource, 2f));
+            else
+                _CurrentMusicSource = PlaySound(sound, false, null, null);
+        }
+    }
+
     public static void PlaySingleShot(GameSounds.Sound sound, Action callback)
     {
         PlaySound(sound, false, null, callback);
@@ -60,10 +74,10 @@ public class AudioManager : MonoBehaviour
         PlaySound(sound, false, from, callback);
     }
 
-    private static void PlaySound(GameSounds.Sound sound, bool loop, GameObject from = null, Action callback = null)
+    private static AudioSource PlaySound(GameSounds.Sound sound, bool loop, GameObject from = null, Action callback = null)
     {
         if (sound.Clip == null)
-            return;
+            return null;
 
         bool destroy = from == null;
         if (destroy)
@@ -104,6 +118,7 @@ public class AudioManager : MonoBehaviour
             source.Play();
         else
             instance.StartCoroutine(instance.PlayClip(source, callback, destroy));
+        return source;
     }
 
     private IEnumerator PlayClip(AudioSource source, Action callback, bool destroy = false)
@@ -113,5 +128,19 @@ public class AudioManager : MonoBehaviour
         callback?.Invoke();
         if (destroy)
             Destroy(source.gameObject);
+    }
+
+    private IEnumerator FadeOut(AudioSource newSource, AudioSource oldSource, float duration)
+    {
+        newSource.volume = 0f;
+        float startTime = Time.unscaledTime;
+        while (Time.unscaledTime < startTime + duration)
+        {
+            newSource.volume = (Time.unscaledTime - startTime) / duration;
+            oldSource.volume = 1f - (Time.unscaledTime - startTime) / duration;
+            yield return null;
+        }
+        newSource.volume = 1f;
+        Destroy(oldSource.gameObject);
     }
 }
