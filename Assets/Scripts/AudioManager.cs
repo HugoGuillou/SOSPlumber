@@ -16,14 +16,8 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance { get; private set; }
 
-    public enum SoundType
-    {
-        Music,
-        Action,
-        Signe,
-        Feedback,
-        Fin,
-    }
+    private static GameSounds _Sounds;
+    public static ref readonly GameSounds Sounds => ref _Sounds;
 
     private static AudioMixer _Mixer;
     private static AudioMixerGroup _MusicGroup;
@@ -50,18 +44,26 @@ public class AudioManager : MonoBehaviour
             _FeedbackGroup = _Mixer.FindMatchingGroups("Feedback")[0];
             _FinGroup = _Mixer.FindMatchingGroups("Fin")[0];
         }
-    }
-    public static void PlaySingleShot(AudioClip clip, SoundType type, GameObject from = null, Action callback = null)
-    {
-        PlaySound(clip, type, false, from, callback);
+        if (_Sounds == null)
+        {
+            _Sounds = Resources.Load<GameSounds>("GameSounds");
+        }
     }
 
-    private static void PlaySound(AudioClip clip, SoundType type, bool loop, GameObject from = null, Action callback = null)
+    public static void PlaySingleShot(GameSounds.Sound sound, GameObject from = null, Action callback = null)
     {
+        PlaySound(sound, false, from, callback);
+    }
+
+    private static void PlaySound(GameSounds.Sound sound, bool loop, GameObject from = null, Action callback = null)
+    {
+        if (sound.Clip == null)
+            return;
+
         bool destroy = from == null;
         if (destroy)
         {
-            from = new GameObject("Sound_" + clip.name, typeof(AudioSource));
+            from = new GameObject("Sound_" + sound.Clip.name, typeof(AudioSource));
         }
 
         AudioSource source = from.GetComponent<AudioSource>();
@@ -71,26 +73,26 @@ public class AudioManager : MonoBehaviour
         }
 
         AudioMixerGroup group = null;
-        switch (type)
+        switch (sound.Type)
         {
-            case SoundType.Music:
+            case GameSounds.SoundType.Music:
                 group = _MusicGroup;
                 break;
-            case SoundType.Action:
+            case GameSounds.SoundType.Action:
                 group = _ActionGroup;
                 break;
-            case SoundType.Signe:
+            case GameSounds.SoundType.Signe:
                 group = _SigneGroup;
                 break;
-            case SoundType.Feedback:
+            case GameSounds.SoundType.Feedback:
                 group = _FeedbackGroup;
                 break;
-            case SoundType.Fin:
+            case GameSounds.SoundType.Fin:
                 group = _FinGroup;
                 break;
         }
         source.outputAudioMixerGroup = group;
-        source.clip = clip;
+        source.clip = sound.Clip;
         source.loop = loop;
 
         if (loop)

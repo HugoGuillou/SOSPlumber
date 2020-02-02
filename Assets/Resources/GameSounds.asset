@@ -17,7 +17,7 @@ MonoBehaviour:
   _SwipeSound: {fileID: 0}
   _AcceptSound: {fileID: 0}
   _DeclineSound: {fileID: 0}
-  _NewCharSound: {fileID: 0}
+  _NewCharSound: {fileID: 8300000, guid: 1bb231db134c7774eaca6dfdff4cdbb8, type: 3}
   _DingDongSound: {fileID: 0}
   _TextSound: {fileID: 0}
   _CardFlipSound: {fileID: 0}
