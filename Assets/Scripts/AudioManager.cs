@@ -142,5 +142,6 @@ public class AudioManager : MonoBehaviour
         }
         newSource.volume = 1f;
         Destroy(oldSource.gameObject);
+        _CurrentMusicSource = newSource;
     }
 }
