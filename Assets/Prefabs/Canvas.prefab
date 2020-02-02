@@ -4195,7 +4195,7 @@ MonoBehaviour:
     type: 3}
   _MenuUI: {fileID: 1635882524467324779}
   _DoorUI: {fileID: 6536824383623976399}
-  _GameUI: {fileID: 4375045753883900385}
+  _GameUI: {fileID: 6536824383278635965}
   DoorCard: {fileID: 0}
 --- !u!1 &6536824383917906000
 GameObject:

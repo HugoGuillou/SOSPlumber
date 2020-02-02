@@ -177,11 +177,8 @@ public class Game : MonoBehaviour
 
         if (swipeDir != Swipe.None)
         {
-            AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
-
             if (IsMenu)
             {
-                //_MenuUI?.SetActive(false);
                 AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
                 IsMenu = false;
                 NextCard();

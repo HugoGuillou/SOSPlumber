@@ -261,7 +261,8 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.82e-43, y: -4.5605733e+36, z: 6.81e-43, w: -65.49603}
+  m_BoundingSphereOverride: {x: -2.3404263e-24, y: 2.3937171e-21, z: -3.0590932e+31,
+    w: NaN}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -540,6 +541,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4375045753883900385, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6520418364381736114, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -650,6 +656,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6536824383371292516, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 360.5999
+      objectReference: {fileID: 0}
     - target: {fileID: 6536824383383908582, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -708,6 +719,31 @@ PrefabInstance:
     - target: {fileID: 6536824383493393015, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383511298529, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383511298529, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383511298529, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383511298529, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383511298529, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6536824383893377905, guid: b90fa12ccfa993040979f79f0cd19e0f,
@@ -839,6 +875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824384501887639, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -350.5999
       objectReference: {fileID: 0}
     - target: {fileID: 6536824384683430833, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
