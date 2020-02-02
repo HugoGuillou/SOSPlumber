@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEditorInternal;
 #endif
 
+[Serializable]
 [CreateAssetMenu(fileName = "StatsPool", menuName = "SOS/Stats Pool")]
 public class StatsPool : ScriptableObject
 {
@@ -25,12 +26,15 @@ public class StatsPool : ScriptableObject
     private StringPool _QuotePool;
     public string Quote => _QuotePool.Pick();
 
+    public static readonly float MaxSexAppeal = 70f;
     [SerializeField]
     private IntPool _BonusSexAppealPool;
-    public float BonusSexAppeal => _BonusSexAppealPool.Pick(70f);
+    public float BonusSexAppeal => _BonusSexAppealPool.Pick(MaxSexAppeal);
+
+    public static readonly float MaxRepair = 5f;
     [SerializeField]
     private IntPool _BonusRepairPool;
-    public float BonusRepair => _BonusRepairPool.Pick(5f);
+    public float BonusRepair => _BonusRepairPool.Pick(MaxRepair);
 }
 
 [Serializable]
@@ -41,8 +45,8 @@ public class StatPool<T>
 
     public T Pick()
     {
-        //return _Pool[UnityEngine.Random.Range(0, _Pool.Count)];
-        return default;
+        return _Pool[UnityEngine.Random.Range(0, _Pool.Count)];
+        //return default;
     }
 }
 

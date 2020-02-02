@@ -77,11 +77,13 @@ public class Card : MonoBehaviour
     public void AcceptCard()
     {
         OnCardAccepted?.Invoke(this);
+        AudioManager.PlaySingleShot(AudioManager.Sounds.AcceptSound);
     }
 
     public void DisCard()
     {
         OnCardDiscarded?.Invoke(this);
+        AudioManager.PlaySingleShot(AudioManager.Sounds.DeclineSound);
     }
 
     public string GetQuote()
@@ -150,7 +152,7 @@ public class Card : MonoBehaviour
         String sexyStr = "";
         if (sexyStat > 0)
             sexyStr += "+";
-        sexyStr += ((int)(sexyStat * 100f)).ToString();
+        sexyStr += ((int)(sexyStat * StatsPool.MaxSexAppeal)).ToString();
         //TextMesh cardHotness = transform.Find("StatsContainer/HotnessContener/HotnesIcon/HotnessPoint").GetComponent<TextMesh>();
         hotnessComponent.text = sexyStr;
 
@@ -158,7 +160,7 @@ public class Card : MonoBehaviour
         String repairStr = "";
         if (houseStat > 0f)
             repairStr += "+";
-        repairStr += ((int)houseStat).ToString();
+        repairStr += ((int)(houseStat * StatsPool.MaxRepair)).ToString();
         //TextMesh cardRepair = transform.Find("StatsContainer/RepairContener/RepairIcon/RepairPoint").GetComponent<TextMesh>();
         repairComponent.text = repairStr;
 
