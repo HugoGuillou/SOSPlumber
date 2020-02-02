@@ -10,8 +10,8 @@ using UnityEditorInternal;
 [CreateAssetMenu(fileName = "StatsPool", menuName = "SOS/Stats Pool")]
 public class StatsPool : ScriptableObject
 {
-    private StatsPool _instance;
-    public StatsPool instance
+    private static StatsPool _instance;
+    public static StatsPool instance
     {
         get
         {
