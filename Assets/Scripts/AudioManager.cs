@@ -50,6 +50,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public static void PlaySingleShot(GameSounds.Sound sound, Action callback)
+    {
+        PlaySound(sound, false, null, callback);
+    }
+
     public static void PlaySingleShot(GameSounds.Sound sound, GameObject from = null, Action callback = null)
     {
         PlaySound(sound, false, from, callback);

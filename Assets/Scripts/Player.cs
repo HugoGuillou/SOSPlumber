@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
     {
         Debug.LogFormat("{0} : {1} ({2})", card.SexyStat, card.HouseStat, card.HouseType);
         temperatureStat.Value += card.SexyStat;
+
         switch (card.HouseType)
         {
             case StatType.Chimney:
@@ -132,34 +133,24 @@ public class Player : MonoBehaviour
                 boilerStat.Value += card.HouseStat;
                 break;
         }
-    }
 
-    void Start()
-    {
-    }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (!Mathf.Approximately(0f, card.HouseStat))
         {
-            temperatureStat.Value += ShiftedValue(0.1f);
+            if (!Mathf.Approximately(0f, card.SexyStat))
+            {
+                AudioManager.PlaySingleShot((card.HouseStat < 0f) ? AudioManager.Sounds.RepairDownSound : AudioManager.Sounds.RepairUpSound, () =>
+                {
+                    AudioManager.PlaySingleShot((card.SexyStat < 0f) ? AudioManager.Sounds.HotnessDownSound : AudioManager.Sounds.HotnessUpSound);
+                });
+            }
+            else
+                AudioManager.PlaySingleShot((card.HouseStat < 0f) ? AudioManager.Sounds.RepairDownSound : AudioManager.Sounds.RepairUpSound);
         }
-        else if (Input.GetKeyDown(KeyCode.Z))
-        {
-            chimneyStat.Value += ShiftedValue(0.1f);
-        }
-        else if (Input.GetKeyDown(KeyCode.E))
-        {
-            plumbingStat.Value += ShiftedValue(0.1f);
-        }
-        else if (Input.GetKeyDown(KeyCode.R))
-        {
-            kitchenStat.Value += ShiftedValue(0.1f);
-        }
-        else if (Input.GetKeyDown(KeyCode.T))
-        {
-            boilerStat.Value += ShiftedValue(0.1f);
-        }
+        else
+        if (!Mathf.Approximately(0f, card.SexyStat))
+            AudioManager.PlaySingleShot((card.SexyStat < 0f) ? AudioManager.Sounds.HotnessDownSound : AudioManager.Sounds.HotnessUpSound);
+
     }
 
     float ShiftedValue(float value)
