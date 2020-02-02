@@ -34,12 +34,15 @@ public class Card : MonoBehaviour
 
     [SerializeField]
     private float sexyStat;
+    public float SexyStat => sexyStat;
 
     [SerializeField]
     private Player.StatType houseType;
+    public Player.StatType HouseType => houseType;
 
     [SerializeField]
     private float houseStat;
+    public float HouseStat => houseStat;
 
     [SerializeField]
     private GameObject imagePrefab;
