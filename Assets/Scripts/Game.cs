@@ -40,12 +40,43 @@ public class Game : MonoBehaviour
     private Vector2 secondPressPos;
     private Vector2 currentSwipe;
 
+    [SerializeField]
+    private GameObject VictoryCard;
+    [SerializeField]
+    private GameObject NoRepairCard;
+    [SerializeField]
+    private GameObject OverloadCard;
+
+    [SerializeField]
+    private GameObject _MenuUI;
+    [SerializeField]
+    private GameObject _DoorUI;
+    [SerializeField]
+    private GameObject _GameUI;
+
+    private bool _IsMenu = true;
+    private bool IsMenu
+    {
+        get { return _IsMenu; }
+        set
+        {
+            if (_IsMenu == value)
+                return;
+            _MenuUI.SetActive(value);
+            _DoorUI.SetActive(value);
+            _GameUI.SetActive(!value);
+            _IsMenu = value;
+        }
+    }
+
     private enum GameState
     {
         DoorClosed,
         DoorOpen,
-        Swiping
+        Swiping,
+        Over
     }
+    private GameState gameState;
 
     private enum Swipe
     {
@@ -53,10 +84,20 @@ public class Game : MonoBehaviour
         Right,
         None
     }
-    private GameState gameState;
+
+    private enum EndState
+    {
+        Victory,
+        Overload,
+        NoRepair,
+        None
+    }
+    private EndState endState= EndState.None;
 
     [SerializeField]
     private Transform DoorCard;
+
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -84,57 +125,47 @@ public class Game : MonoBehaviour
 
         Deck = GenerateDeck(deckSize);
 
+        /*
         // Prepare our first card
         Card.current = Deck.Dequeue();
 
         gameState = GameState.DoorOpen;
-
+        */
+        NextCard();
         Player.OnStatChanged += StatsUpdated;
     }
 
 
     public void StatsUpdated(Player.StatType type, float hotness, float oldHotness)
     {
-        
-        if (hotness > 1)
-            hotness = 1;
-
-        Player.Stat changedStat;
-        Debug.Log(type.ToString() + " " + hotness);
-        switch (type)
+        // SEXYNESS OVERLOAD
+        if(type == Player.StatType.Hotness && hotness == 1)
         {
-            case Player.StatType.Boiler:
-                changedStat = Player.BoilerStat;
-                if (changedStat.Value <= 0)
-                    Debug.Log("Boiler exploded !");
-                break;
+            gameOver = true;
+            endState = EndState.Overload;
 
-            case Player.StatType.Chimney:
-                changedStat = Player.BoilerStat;
-                if (changedStat.Value <= 0)
-                    Debug.Log("Boiler exploded !");
-                break;
+            GenerateEndCard(endState);
 
-            case Player.StatType.Hotness:
-                changedStat = Player.BoilerStat;
-                if (changedStat.Value <= 0)
-                    Debug.Log("Boiler exploded !");
-                break;
+            Debug.Log("Perdu !");
 
-            case Player.StatType.Kitchen:
-                changedStat = Player.BoilerStat;
-                if (changedStat.Value <= 0)
-                    Debug.Log("Boiler exploded !");
-                break;
 
-            case Player.StatType.Plumbing:
-                changedStat = Player.PlumbingStat;
-                if (changedStat.Value <= 0)
-                    Debug.Log("Boiler exploded !");
-                break;
-            
         }
+    }
 
+    public void DeckEmpty()
+    {
+        gameOver = true;
+
+        float totalRepair = Player.ChimneyStat.Value + Player.PlumbingStat.Value + Player.KitchenStat.Value + Player.BoilerStat.Value;
+
+        if (totalRepair == 1)
+            endState = EndState.Victory;
+        else
+            endState = EndState.NoRepair;
+
+        GenerateEndCard(endState);
+
+        Debug.Log("Fin du jeu !");
     }
 
     // Update is called once per frame
@@ -143,10 +174,25 @@ public class Game : MonoBehaviour
 
         Swipe swipeDir = GetSwipe();
 
-        if (swipeDir == Swipe.Left)
-            SwipeLeft();
-        else if (swipeDir == Swipe.Right)
-            SwipeRight();
+        if (swipeDir != Swipe.None)
+        {
+            AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
+            IsMenu = false;
+
+            if (_IsMenu)
+            {
+                //_MenuUI?.SetActive(false);
+                AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
+                _IsMenu = false;
+            }
+            else
+            {
+                if (swipeDir == Swipe.Left)
+                    SwipeLeft();
+                else if (swipeDir == Swipe.Right)
+                    SwipeRight();
+            }
+        }
 
         /*
         if (gameState == GameState.DoorOpen)
@@ -166,6 +212,43 @@ public class Game : MonoBehaviour
         }
         */
 
+    }
+
+    void GenerateEndCard(EndState end)
+    {
+        GameObject endCard = new GameObject();
+        string endText=""; 
+
+        foreach (Card card in Deck)
+        {
+            Destroy(card.gameObject);
+        }
+
+        TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
+
+        switch (end)
+        {
+            case EndState.Victory:
+                endCard  = Instantiate(VictoryCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
+                endText = "Vous avez eu les yeux plus gros que le ventre. Je vous emmène au 7e ciel !";
+                break;
+
+            case EndState.NoRepair:
+                endCard = Instantiate(NoRepairCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
+                endText = "On dirait qu'il reste encore du boulot. On dirait bien qu'il va falloir recommencer.";
+                break;
+
+            case EndState.Overload:
+                endCard = Instantiate(OverloadCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
+                endText = "Vous avez eu les yeux plus gros que le ventre. Je vous emmène au 7e ciel !";
+                break;
+            default:
+                endText = "Switch Error";
+                break;
+        }
+
+        endCard.transform.SetAsFirstSibling();
+        textMesh.text = endText;
     }
 
     Queue<Card> GenerateDeck(int size)
@@ -265,7 +348,6 @@ public class Game : MonoBehaviour
             string quote = lineData[2];
             string gender = lineData[4];
 
-
             imagePaths.Add(imagePath);
             Names["M"].Add(name);
             Quotes.Add(quote);
@@ -277,7 +359,7 @@ public class Game : MonoBehaviour
     //https://forum.unity.com/threads/swipe-in-all-directions-touch-and-mouse.165416/
     private Swipe GetSwipe()
     {
-        if (gameState == GameState.Swiping)
+        if (gameState == GameState.Swiping || gameOver)
             return Swipe.None;
 
         if (Input.GetMouseButtonDown(0))
@@ -339,8 +421,16 @@ public class Game : MonoBehaviour
 
     void NextCard()
     {
-        if (Deck.Count > 0)
-            Card.current = Deck.Dequeue();
+        if (endState != EndState.None)
+            return;
+
+        if (Deck.Count == 0)
+        {
+            DeckEmpty();
+            return;
+        }
+
+        Card.current = Deck.Dequeue();
 
         gameState = GameState.DoorOpen;
 
@@ -352,6 +442,7 @@ public class Game : MonoBehaviour
         TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
         textMesh.text = Card.current.GetQuote();
 
+        AudioManager.PlaySingleShot(AudioManager.Sounds.NewCharSound);
     }
 
     IEnumerator DrawCardAnim()
@@ -398,12 +489,13 @@ public class Game : MonoBehaviour
 
     IEnumerator sweepRight(Transform tr)
     {
+        Card.current.AcceptCard();
+
         while (tr.localPosition.x <= 600)
         {
             tr.Translate(Vector3.right * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-        Card.current.AcceptCard();
         NextCard();
 
         Debug.Log("Card gone");
