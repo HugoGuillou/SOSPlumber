@@ -10,6 +10,17 @@ using UnityEditorInternal;
 [CreateAssetMenu(fileName = "StatsPool", menuName = "SOS/Stats Pool")]
 public class StatsPool : ScriptableObject
 {
+    private StatsPool _instance;
+    public StatsPool instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = Resources.Load<StatsPool>("StatsPool");
+            return _instance;
+        }
+    }
+
     [SerializeField]
     private StringPool _QuotePool;
     public string Quote => _QuotePool.Pick();
