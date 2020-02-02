@@ -43,6 +43,9 @@ MonoBehaviour:
   _TextSounds:
     _Pool:
     - {fileID: 8300000, guid: 5a3e9c9f874c05741a230896529d1cab, type: 3}
+    - {fileID: 8300000, guid: e8dbf6bac2c5ed8459b5001d017c94d1, type: 3}
+    - {fileID: 8300000, guid: 43997f7db72f4484d9afbb46be2e158b, type: 3}
+    - {fileID: 8300000, guid: e23a217d34a82814b8ece5ce24d65700, type: 3}
     _Type: 2
   _NewCharSounds:
     _Pool:
@@ -59,42 +62,80 @@ MonoBehaviour:
     - {fileID: 8300000, guid: e450a385b1041194a99b94daefbb732e, type: 3}
     - {fileID: 8300000, guid: 02342097126859a4180f8ffbdcfbfc97, type: 3}
     - {fileID: 8300000, guid: 301f6d5ed0ed2fe4696094058d99891e, type: 3}
-    - {fileID: 8300000, guid: 6d637bc33a884014f9a2e3d3b86c9327, type: 3}
     - {fileID: 8300000, guid: 1b3b39b1f8208b1439f1156f595d69d4, type: 3}
     - {fileID: 8300000, guid: 9dc5e57f3f09e9241950f8ac6954a9ec, type: 3}
+    - {fileID: 8300000, guid: 6d637bc33a884014f9a2e3d3b86c9327, type: 3}
     _Type: 2
   _DingDongSounds:
     _Pool:
     - {fileID: 8300000, guid: b661172a532b59046bab0da21e2e18fa, type: 3}
     - {fileID: 8300000, guid: 26180c5ac09b1744cb89fce9bdeb5509, type: 3}
+    - {fileID: 8300000, guid: b510ab0a75b4fda49832622c94ed9f1b, type: 3}
+    - {fileID: 8300000, guid: ae65db537cf118748a7ca47c369bcdfc, type: 3}
     _Type: 2
   _CardFlipSounds:
     _Pool:
     - {fileID: 8300000, guid: 20be912bd1656794d8a6f690d79365e4, type: 3}
     _Type: 2
   _HotnessUpSounds:
-    _Pool: []
+    _Pool:
+    - {fileID: 8300000, guid: 15d05f3284bbcc949b69b7ef6958df32, type: 3}
+    - {fileID: 8300000, guid: fbbc05b329e747a46baea942e1ed8319, type: 3}
+    - {fileID: 8300000, guid: 98ab9107d6a74f945bcc7785e76fd456, type: 3}
+    - {fileID: 8300000, guid: 69e4511538e302e4db46757c5243eab3, type: 3}
+    - {fileID: 8300000, guid: 1735f375a4795574e82b58b798784d31, type: 3}
+    - {fileID: 8300000, guid: 40ac1ec5825c4f9499316be9b990c7ef, type: 3}
+    - {fileID: 8300000, guid: fdb3668ca93de894d96dce63e3bee673, type: 3}
+    - {fileID: 8300000, guid: 5805cdb11454d844588bf2e0fc1c044a, type: 3}
+    - {fileID: 8300000, guid: 331f686ba99bde943aac2ea1cad439c3, type: 3}
     _Type: 3
   _HotnessDownSounds:
-    _Pool: []
+    _Pool:
+    - {fileID: 8300000, guid: 5f561186126b2d5468b77a9f522c95ff, type: 3}
+    - {fileID: 8300000, guid: 9ee3631e7e8731947b6ad97c3cbb552b, type: 3}
+    - {fileID: 8300000, guid: aa7c34462d1842b4fbeddbbd20515436, type: 3}
+    - {fileID: 8300000, guid: 8b360360cd0be774aab2d08eb0146dea, type: 3}
+    - {fileID: 8300000, guid: d1ea4952f78073a458b0a87fb12940df, type: 3}
     _Type: 3
   _RepairUpSounds:
-    _Pool: []
+    _Pool:
+    - {fileID: 8300000, guid: 97c59e629952dc343a92c4c3a671b584, type: 3}
+    - {fileID: 8300000, guid: c055f4b5bf3de71458ee7bd5266ef75b, type: 3}
+    - {fileID: 8300000, guid: fab248a3fba32754789673bef66b3132, type: 3}
+    - {fileID: 8300000, guid: 8cd0362b1897186448203a3c0674bd61, type: 3}
+    - {fileID: 8300000, guid: e3bc8f88ea880ae4b9c0ea9711dc5271, type: 3}
+    - {fileID: 8300000, guid: 6a1cce222a5c3ee45a46b09a604893ef, type: 3}
+    - {fileID: 8300000, guid: 9345252467a3843419d40b0cc463c1ff, type: 3}
+    - {fileID: 8300000, guid: 696994f0d584a8247acb29dc6fa50303, type: 3}
+    - {fileID: 8300000, guid: af8a81019bfa83d4f849b8fde9b0cfd8, type: 3}
+    - {fileID: 8300000, guid: f88c91d3634519542803a8ef21e89a78, type: 3}
+    - {fileID: 8300000, guid: da57ac66ec7331342bbf90fae36f754a, type: 3}
+    - {fileID: 8300000, guid: 3e703451e1317204d9c02cbbb83060c7, type: 3}
+    - {fileID: 8300000, guid: 098bb0e5d562df94b9e1b07a85274a86, type: 3}
+    - {fileID: 8300000, guid: 018eede58f7564a4c99e2cb4b0341f1f, type: 3}
+    - {fileID: 8300000, guid: 3708563eb9688bb4aa1de947aa7d87e3, type: 3}
+    - {fileID: 8300000, guid: 7573a6d90b4a1d74fb396296c27adbcc, type: 3}
+    - {fileID: 8300000, guid: 180a0c7d9a04f46419e14b466a239dc2, type: 3}
+    - {fileID: 8300000, guid: 0088be98f6559af45a4cae782b30f513, type: 3}
+    - {fileID: 8300000, guid: e5a0041ea86fa2f45a025244a28c7258, type: 3}
     _Type: 3
   _RepairDownSounds:
-    _Pool: []
+    _Pool:
+    - {fileID: 8300000, guid: c0b69bf94424f5e48a5cb236729a0762, type: 3}
+    - {fileID: 8300000, guid: 409df17482415c94fb7a3596bfab5762, type: 3}
+    - {fileID: 8300000, guid: 8a72ad92e869d644d97f65fc6e881d92, type: 3}
+    - {fileID: 8300000, guid: 6c0b11ada20255845bc286982d9549ee, type: 3}
+    - {fileID: 8300000, guid: 19a75310f58f0fc43af1af76da5a8e84, type: 3}
     _Type: 3
   _KinkySounds:
     _Pool:
-    - {fileID: 8300000, guid: dded3003ce88f1f4a833b44bd498ac55, type: 3}
-    - {fileID: 8300000, guid: 276e0ba7ba8bac74cab8dcf0303dd10c, type: 3}
+    - {fileID: 8300000, guid: dd811177f06ee8740af86925aa1bb148, type: 3}
     _Type: 4
   _PerfectSounds:
     _Pool:
-    - {fileID: 8300000, guid: c2db5f539254142418b8007054a413d0, type: 3}
+    - {fileID: 8300000, guid: f04edca66e85c794ba0e444fec92143c, type: 3}
     _Type: 4
   _AlmostSounds:
     _Pool:
-    - {fileID: 8300000, guid: 2746ab32c7a41654b9342652e4ce6915, type: 3}
-    - {fileID: 8300000, guid: 1f84d7c4751bd924fa6e3595bae77001, type: 3}
+    - {fileID: 8300000, guid: b53944b4751d5724caf85c020a7375aa, type: 3}
     _Type: 4
