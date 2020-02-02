@@ -11,11 +11,11 @@ public class Player : MonoBehaviour
     [Serializable]
     public enum StatType
     {
-        Hotness,
-        Chimney,
-        Plumbing,
-        Kitchen,
-        Boiler
+        Chimney = 0x00,
+        Plumbing = 0x01,
+        Kitchen = 0x02,
+        Boiler = 0x03,
+        Hotness = 0x04,
     }
 
     [Serializable]
@@ -95,6 +95,21 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void OnEnable()
+    {
+        Card.OnCardAccepted += CardAccepted;
+    }
+
+    private void OnDisable()
+    {
+        Card.OnCardAccepted -= CardAccepted;
+    }
+
+    void CardAccepted(Card card)
+    {
+
     }
 
     void Start()
