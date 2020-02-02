@@ -183,8 +183,11 @@ public class Game : MonoBehaviour
             int randName = Random.Range(0, Names[gender].Count);
             string name = Names["M"][randName];
 
+            /*
             int randQuote = Random.Range(0, Quotes.Count);
             string quote = Quotes[randQuote];
+            */
+            string quote = StatsPool.instance.Quote;
 
             //int randImage = (int)Random.Range(0, imagePaths.Count - 1);
             //string imagePath = imagePaths[randQuote];
@@ -195,7 +198,10 @@ public class Game : MonoBehaviour
             GameObject imagePrefab = ImagePrefabs[randImage];
 
             // A CHANGER QUAND LES MODIFS DANS PLAYER SERONT PUSHÉS //////////////////////////////////
-            float sexyStat = Random.Range(-0.1f, 0.1f);
+            //float sexyStat = Random.Range(-0.1f, 0.1f);
+
+            float sexyStat = StatsPool.instance.BonusSexAppeal;
+
             /*
             int chimneyStat = Random.Range(-10, 10);
             int plumbryStat = Random.Range(-10, 10);
@@ -206,7 +212,8 @@ public class Game : MonoBehaviour
             System.Array statValues = System.Enum.GetValues(typeof(Player.StatType));
             int randHouseType = Random.Range(0, 4);
             Player.StatType houseType = (Player.StatType)statValues.GetValue(randHouseType);
-            float houseStat = Random.Range(-0.1f, 0.1f);
+            //float houseStat = Random.Range(-0.1f, 0.1f);
+            float houseStat = StatsPool.instance.BonusRepair;
 
             string repairIconPath = "";
 
