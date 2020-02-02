@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4779066950215817777}
   - component: {fileID: 6964636334576666875}
   m_Layer: 0
-  m_Name: prefab_F2_canvas
+  m_Name: prefab_F6_canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b0a9baf9dfc264f4a9150122d6709a50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff577da425279bd46b6851cf1e013dfe, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
