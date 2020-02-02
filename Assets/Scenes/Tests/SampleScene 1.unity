@@ -179,6 +179,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &384453741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6536824383893377905, guid: b90fa12ccfa993040979f79f0cd19e0f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1689106338}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &384453742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384453741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46b21f83102a06042a2584a314b9cbfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  csvFile: {fileID: 4900000, guid: 3f05b27854ba82843846efbbfde298d7, type: 3}
+  deckSize: 10
+  cardPrefab: {fileID: 370837299135294411, guid: 7eb56d02549e29846a474316ef7d4349,
+    type: 3}
+  deckPlaceHolder: {fileID: 1539785273}
+  DialogBubble: {fileID: 1689106340}
+  bubblePopSpeed: 3
+  DoorCard: {fileID: 0}
 --- !u!1 &532594305
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +523,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1620872167}
-  - component: {fileID: 1620872166}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -505,26 +530,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1620872166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620872165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b21f83102a06042a2584a314b9cbfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  csvFile: {fileID: 4900000, guid: 3f05b27854ba82843846efbbfde298d7, type: 3}
-  deckSize: 10
-  cardPrefab: {fileID: 370837299135294411, guid: 7eb56d02549e29846a474316ef7d4349,
-    type: 3}
-  deckPlaceHolder: {fileID: 1539785273}
-  DialogBubble: {fileID: 1689106340}
-  bubblePopSpeed: 3
-  DoorCard: {fileID: 0}
 --- !u!4 &1620872167
 Transform:
   m_ObjectHideFlags: 0
