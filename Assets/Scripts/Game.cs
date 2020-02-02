@@ -91,14 +91,46 @@ public class Game : MonoBehaviour
 
     public void StatsUpdated(Player.StatType type, float hotness, float oldHotness)
     {
+        
         if (hotness > 1)
             hotness = 1;
 
-        System.Array statTypes = System.Enum.GetValues(typeof(Player.StatType));
-        foreach (Player.StatType statType in statTypes)
+        Player.Stat changedStat;
+        Debug.Log(type.ToString() + " " + hotness);
+        switch (type)
         {
+            case Player.StatType.Boiler:
+                changedStat = Player.BoilerStat;
+                if (changedStat.Value <= 0)
+                    Debug.Log("Boiler exploded !");
+                break;
+
+            case Player.StatType.Chimney:
+                changedStat = Player.BoilerStat;
+                if (changedStat.Value <= 0)
+                    Debug.Log("Boiler exploded !");
+                break;
+
+            case Player.StatType.Hotness:
+                changedStat = Player.BoilerStat;
+                if (changedStat.Value <= 0)
+                    Debug.Log("Boiler exploded !");
+                break;
+
+            case Player.StatType.Kitchen:
+                changedStat = Player.BoilerStat;
+                if (changedStat.Value <= 0)
+                    Debug.Log("Boiler exploded !");
+                break;
+
+            case Player.StatType.Plumbing:
+                changedStat = Player.PlumbingStat;
+                if (changedStat.Value <= 0)
+                    Debug.Log("Boiler exploded !");
+                break;
             
         }
+
     }
 
     // Update is called once per frame
@@ -159,7 +191,7 @@ public class Game : MonoBehaviour
             GameObject imagePrefab = ImagePrefabs[randImage];
 
             // A CHANGER QUAND LES MODIFS DANS PLAYER SERONT PUSHÉS //////////////////////////////////
-            int sexyStat = Random.Range(-10, 10);
+            float sexyStat = Random.Range(-0.1f, 0.1f);
             /*
             int chimneyStat = Random.Range(-10, 10);
             int plumbryStat = Random.Range(-10, 10);
@@ -167,11 +199,10 @@ public class Game : MonoBehaviour
             int boilerStat = Random.Range(-10, 10);
             */
 
-
             System.Array statValues = System.Enum.GetValues(typeof(Player.StatType));
             int randHouseType = Random.Range(0, 4);
             Player.StatType houseType = (Player.StatType)statValues.GetValue(randHouseType);
-            float houseStat = Random.Range(-0.1f, 0.1f);
+            float houseStat = Random.Range(-0.5f, 0.5f);
 
             Debug.Log(houseType);
             ///////////////////////////////////////////////////////////////////////////////////////////
