@@ -59,6 +59,9 @@ public class Card : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI repairComponent;
 
+    [SerializeField]
+    private Image repairIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -122,7 +125,7 @@ public class Card : MonoBehaviour
         repairComponent.text = repairStr;
     }
 
-    public void SetAllData(string n, string q, float hotness, Player.StatType type, float stat, GameObject ip)
+    public void SetAllData(string n, string q, float hotness, Player.StatType type, float stat, GameObject ip, string repairIconPath)
     {
         name = n;
         quote = q;
@@ -147,7 +150,7 @@ public class Card : MonoBehaviour
         String sexyStr = "";
         if (sexyStat > 0)
             sexyStr += "+";
-        sexyStr += sexyStat.ToString();
+        sexyStr += ((int)(sexyStat * 100f)).ToString();
         //TextMesh cardHotness = transform.Find("StatsContainer/HotnessContener/HotnesIcon/HotnessPoint").GetComponent<TextMesh>();
         hotnessComponent.text = sexyStr;
 
@@ -158,5 +161,7 @@ public class Card : MonoBehaviour
         repairStr += ((int)houseStat).ToString();
         //TextMesh cardRepair = transform.Find("StatsContainer/RepairContener/RepairIcon/RepairPoint").GetComponent<TextMesh>();
         repairComponent.text = repairStr;
+
+        repairIcon.sprite = Resources.Load<Sprite>(repairIconPath);
     }
 }

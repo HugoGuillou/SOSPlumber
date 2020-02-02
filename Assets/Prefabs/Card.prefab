@@ -181,15 +181,14 @@ MonoBehaviour:
   quote: 
   name: 
   sexyStat: 0
-  chimneyStat: 0
-  kitchenStat: 0
-  boilerStat: 0
-  plumbryStat: 0
+  houseType: 0
+  houseStat: 0
   imagePrefab: {fileID: 0}
   imageParent: {fileID: 370837299836310158}
   nameComponent: {fileID: 370837300384550164}
   hotnessComponent: {fileID: 370837299914122087}
   repairComponent: {fileID: 370837299218942668}
+  repairIcon: {fileID: 370837298939612741}
 --- !u!1 &370837299218942666
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +255,7 @@ MonoBehaviour:
   m_text: +1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: de9a05bd473ec5e48904104503258b8f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -664,7 +663,7 @@ MonoBehaviour:
   m_text: +5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: de9a05bd473ec5e48904104503258b8f, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

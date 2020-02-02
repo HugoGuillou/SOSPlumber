@@ -16,6 +16,7 @@ public class Game : MonoBehaviour
     private List<string> Quotes;
     private List<string> imagePaths;
     private List<GameObject> ImagePrefabs;
+    private List<Sprite> RepairIcons;
 
     private Queue<Card> Deck;
 
@@ -75,6 +76,9 @@ public class Game : MonoBehaviour
 
         GameObject[] resourcesImagePrefabs = Resources.LoadAll<GameObject>("Personnages/Canvas") as GameObject[];
         ImagePrefabs = new List<GameObject>(resourcesImagePrefabs);
+
+        Sprite[] resourceRepairIcons = Resources.LoadAll<Sprite>("RepairIcons") as Sprite[];
+        RepairIcons = new List<Sprite>(resourceRepairIcons);
 
         RetrieveFromCSV(csvFile);
 
@@ -177,7 +181,7 @@ public class Game : MonoBehaviour
             string gender = Genders[randGender];
 
             int randName = Random.Range(0, Names[gender].Count);
-            string name = Names[gender][randName];
+            string name = Names["M"][randName];
 
             int randQuote = Random.Range(0, Quotes.Count);
             string quote = Quotes[randQuote];
@@ -202,11 +206,29 @@ public class Game : MonoBehaviour
             System.Array statValues = System.Enum.GetValues(typeof(Player.StatType));
             int randHouseType = Random.Range(0, 4);
             Player.StatType houseType = (Player.StatType)statValues.GetValue(randHouseType);
-            float houseStat = Random.Range(-0.5f, 0.5f);
+            float houseStat = Random.Range(-0.1f, 0.1f);
+
+            string repairIconPath = "";
+
+            switch (houseType)
+            {
+                case Player.StatType.Boiler:
+                    repairIconPath = "RepairIcons/Spr_Heater";
+                    break;
+                case Player.StatType.Kitchen:
+                    repairIconPath = "RepairIcons/Spr_Electricity";
+                    break;
+                case Player.StatType.Plumbing:
+                    repairIconPath = "RepairIcons/Spr_Tap";
+                    break;
+                case Player.StatType.Chimney:
+                    repairIconPath = "RepairIcons/Spr_House";
+                    break;
+            }
 
             Debug.Log(houseType);
             ///////////////////////////////////////////////////////////////////////////////////////////
-            ourCard.SetAllData(name, quote, sexyStat, houseType, houseStat, imagePrefab);
+            ourCard.SetAllData(name, quote, sexyStat, houseType, houseStat, imagePrefab, repairIconPath);
 
             ourCard.transform.SetAsFirstSibling();
             ourDeck.Enqueue(ourCard);
@@ -234,12 +256,11 @@ public class Game : MonoBehaviour
             string imagePath = lineData[0];
             string name = lineData[1];
             string quote = lineData[2];
-            string gender = lineData[3];
+            string gender = lineData[4];
 
-            string debugLine = imagePath + ", " + name + ", " + quote + ", " + gender;
 
             imagePaths.Add(imagePath);
-            Names[gender].Add(name);
+            Names["M"].Add(name);
             Quotes.Add(quote);
 
         }
