@@ -131,7 +131,6 @@ public class Game : MonoBehaviour
 
         gameState = GameState.DoorOpen;
         */
-        NextCard();
         Player.OnStatChanged += StatsUpdated;
 
         AudioManager.PlayLoop(AudioManager.Sounds.MenuMusic);
@@ -179,7 +178,6 @@ public class Game : MonoBehaviour
         if (swipeDir != Swipe.None)
         {
             AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
-            IsMenu = false;
 
             if (IsMenu)
             {
@@ -413,13 +411,15 @@ public class Game : MonoBehaviour
     void SwipeRight()
     {
         gameState = GameState.Swiping;
-        StartCoroutine(sweepRight(Card.current.transform));
+        if (Card.current != null)
+            StartCoroutine(sweepRight(Card.current.transform));
     }
 
     void SwipeLeft()
     {
         gameState = GameState.Swiping;
-        StartCoroutine(sweepLeft(Card.current.transform));
+        if (Card.current != null)
+            StartCoroutine(sweepLeft(Card.current.transform));
     }
 
     void NextCard()
@@ -503,19 +503,21 @@ public class Game : MonoBehaviour
             tr.Translate(Vector3.right * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-        NextCard();
 
+        NextCard();
         Debug.Log("Card gone");
     }
 
     IEnumerator sweepLeft(Transform tr)
     {
+        Card.current.DisCard();
+
         while (tr.localPosition.x >= -600)
         {
             tr.Translate(Vector3.left * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-        Card.current.DisCard();
+
         NextCard();
         Debug.Log("Card gone");
     }
