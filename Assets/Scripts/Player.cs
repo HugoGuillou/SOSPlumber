@@ -97,6 +97,21 @@ public class Player : MonoBehaviour
         instance = this;
     }
 
+    private void OnEnable()
+    {
+        Card.OnCardAccepted += CardAccepted;
+    }
+
+    private void OnDisable()
+    {
+        Card.OnCardAccepted -= CardAccepted;
+    }
+
+    void CardAccepted(Card card)
+    {
+
+    }
+
     void Start()
     {
     }

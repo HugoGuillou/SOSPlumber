@@ -17,7 +17,6 @@ public class Game : MonoBehaviour
     private List<GameObject> ImagePrefabs;
 
     private Queue<Card> Deck;
-    private Card currentCard;
 
     [SerializeField]
     private int deckSize = 20;
@@ -39,7 +38,8 @@ public class Game : MonoBehaviour
     private Vector2 secondPressPos;
     private Vector2 currentSwipe;
 
-    private enum GameState{
+    private enum GameState
+    {
         DoorClosed,
         DoorOpen
     }
@@ -76,11 +76,11 @@ public class Game : MonoBehaviour
         Debug.Log(ImagePrefabs[1]);
 
         RetrieveFromCSV(csvFile);
-          
+
         Deck = GenerateDeck(deckSize);
 
         // Prepare our first card
-        currentCard = Deck.Dequeue();
+        Card.current = Deck.Dequeue();
 
         gameState = GameState.DoorClosed;
     }
@@ -91,7 +91,7 @@ public class Game : MonoBehaviour
 
         Swipe swipeDir = GetSwipe();
 
-        if(gameState == GameState.DoorOpen)
+        if (gameState == GameState.DoorOpen)
         {
             if (swipeDir == Swipe.Left)
                 SwipeLeft();
@@ -99,9 +99,9 @@ public class Game : MonoBehaviour
                 SwipeRight();
         }
 
-        else if(gameState == GameState.DoorClosed)
+        else if (gameState == GameState.DoorClosed)
         {
-            if(swipeDir != Swipe.None)
+            if (swipeDir != Swipe.None)
             {
                 StartCoroutine(DrawCardAnim());
             }
@@ -113,7 +113,7 @@ public class Game : MonoBehaviour
     {
         Queue<Card> ourDeck = new Queue<Card>();
 
-        for(int i=0; i<size; i++)
+        for (int i = 0; i < size; i++)
         {
             GameObject cardGO = Instantiate(cardPrefab, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
             Card ourCard = cardGO.GetComponent<Card>();
@@ -122,7 +122,7 @@ public class Game : MonoBehaviour
             string gender = Genders[randGender];
 
             int randName = Random.Range(0, Names[gender].Count);
-            Debug.Log(randName+ " " + Names[gender].Count);
+            Debug.Log(randName + " " + Names[gender].Count);
             string name = Names[gender][randName];
 
             int randQuote = Random.Range(0, Quotes.Count);
@@ -138,11 +138,11 @@ public class Game : MonoBehaviour
             GameObject imagePrefab = ImagePrefabs[randImage];
 
             // A CHANGER QUAND LES MODIFS DANS PLAYER SERONT PUSHÉS //////////////////////////////////
-            int sexyStat    = Random.Range(-10, 10);
+            int sexyStat = Random.Range(-10, 10);
             int chimneyStat = Random.Range(-10, 10);
             int plumbryStat = Random.Range(-10, 10);
             int kitchenStat = Random.Range(-10, 10);
-            int boilerStat  = Random.Range(-10, 10);
+            int boilerStat = Random.Range(-10, 10);
             ///////////////////////////////////////////////////////////////////////////////////////////
             ourCard.SetAllData(name, quote, sexyStat, chimneyStat, plumbryStat, kitchenStat, boilerStat, imagePrefab);
 
@@ -170,9 +170,9 @@ public class Game : MonoBehaviour
             string[] lineData = line.Split(';');
 
             string imagePath = lineData[0];
-            string name      = lineData[1];
-            string quote     = lineData[2];
-            string gender    = lineData[3];
+            string name = lineData[1];
+            string quote = lineData[2];
+            string gender = lineData[3];
 
             string debugLine = imagePath + ", " + name + ", " + quote + ", " + gender;
 
@@ -237,21 +237,21 @@ public class Game : MonoBehaviour
 
     void SwipeRight()
     {
-        StartCoroutine(sweepRight(currentCard.transform));
+        StartCoroutine(sweepRight(Card.current.transform));
         //currentCard = null;
     }
 
     void SwipeLeft()
     {
-        StartCoroutine(sweepLeft(currentCard.transform));
+        StartCoroutine(sweepLeft(Card.current.transform));
         //currentCard = null;
 
     }
 
     void NextCard()
     {
-        if(Deck.Count > 0)
-            currentCard = Deck.Dequeue();
+        if (Deck.Count > 0)
+            Card.current = Deck.Dequeue();
 
         gameState = GameState.DoorClosed;
 
@@ -261,7 +261,7 @@ public class Game : MonoBehaviour
 
         //Set Quote Text
         TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
-        textMesh.text = currentCard.GetQuote();
+        textMesh.text = Card.current.GetQuote();
 
     }
 
@@ -278,11 +278,11 @@ public class Game : MonoBehaviour
 
         DoorCard.gameObject.SetActive(false);
 
-        Vector3 currentCardScale = currentCard.transform.localScale;
-        while (currentCard.transform.localScale.x < 1)
+        Vector3 currentCardScale = Card.current.transform.localScale;
+        while (Card.current.transform.localScale.x < 1)
         {
             currentCardScale.x += 1 * Time.deltaTime;
-            currentCard.transform.localScale = currentCardScale;
+            Card.current.transform.localScale = currentCardScale;
             yield return new WaitForEndOfFrame();
         }
 
@@ -290,7 +290,7 @@ public class Game : MonoBehaviour
 
     IEnumerator PopBubble()
     {
-        while(DialogBubble.localScale.x < 1)
+        while (DialogBubble.localScale.x < 1)
         {
             DialogBubble.localScale += Vector3.one * bubblePopSpeed * Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -314,9 +314,9 @@ public class Game : MonoBehaviour
             tr.Translate(Vector3.right * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-
+        Card.current.AcceptCard();
         NextCard();
-        Debug.Log("Card gone"); 
+        Debug.Log("Card gone");
     }
 
     IEnumerator sweepLeft(Transform tr)
@@ -326,7 +326,7 @@ public class Game : MonoBehaviour
             tr.Translate(Vector3.left * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
-
+        Card.current.DisCard();
         NextCard();
         Debug.Log("Card gone");
     }

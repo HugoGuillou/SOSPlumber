@@ -16,7 +16,7 @@ public class Card : MonoBehaviour
     public static Card current
     {
         get { return _current; }
-        private set
+        set
         {
             if (_current == value)
                 return;
