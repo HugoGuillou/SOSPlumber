@@ -132,16 +132,19 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator FadeOut(AudioSource newSource, AudioSource oldSource, float duration)
     {
-        newSource.volume = 0f;
-        float startTime = Time.unscaledTime;
-        while (Time.unscaledTime < startTime + duration)
+        if (oldSource != null)
         {
-            newSource.volume = (Time.unscaledTime - startTime) / duration;
-            oldSource.volume = 1f - (Time.unscaledTime - startTime) / duration;
-            yield return null;
+            newSource.volume = 0f;
+            float startTime = Time.unscaledTime;
+            while (Time.unscaledTime < startTime + duration)
+            {
+                newSource.volume = (Time.unscaledTime - startTime) / duration;
+                oldSource.volume = 1f - (Time.unscaledTime - startTime) / duration;
+                yield return null;
+            }
+            Destroy(oldSource.gameObject);
         }
         newSource.volume = 1f;
-        Destroy(oldSource.gameObject);
         _CurrentMusicSource = newSource;
     }
 }
