@@ -16,13 +16,13 @@ public class Card : MonoBehaviour
     public static Card current
     {
         get { return _current; }
-        private set
+        set
         {
             if (_current == value)
                 return;
             _current = value;
             if (value != null)
-                OnCurrentCardChanged(_current);
+                OnCurrentCardChanged?.Invoke(_current);
         }
     }
 
@@ -33,19 +33,13 @@ public class Card : MonoBehaviour
     private new string name;
 
     [SerializeField]
-    private int sexyStat;
+    private float sexyStat;
 
     [SerializeField]
-    private int chimneyStat;
+    private Player.StatType houseType;
 
     [SerializeField]
-    private int kitchenStat;
-
-    [SerializeField]
-    private int boilerStat;
-
-    [SerializeField]
-    private int plumbryStat;
+    private float houseStat;
 
     [SerializeField]
     private GameObject imagePrefab;
@@ -79,9 +73,14 @@ public class Card : MonoBehaviour
         OnCardAccepted(this);
     }
 
-    public void DisCard() //lololololol
+    public void DisCard()
     {
         OnCardDiscarded(this);
+    }
+
+    public string GetQuote()
+    {
+        return quote;
     }
 
     public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, GameObject ip)
@@ -89,10 +88,10 @@ public class Card : MonoBehaviour
         name = n;
         quote = q;
         sexyStat = s;
-        chimneyStat = cs;
-        plumbryStat = ps;
-        kitchenStat = ks;
-        boilerStat  = bs;
+        //chimneyStat = cs;
+        //plumbryStat = ps;
+        //kitchenStat = ks;
+        //boilerStat  = bs;
         //sprite = i;
 
         // Set image
@@ -110,12 +109,50 @@ public class Card : MonoBehaviour
         sexyStr += sexyStat.ToString();
         //TextMesh cardHotness = transform.Find("StatsContainer/HotnessContener/HotnesIcon/HotnessPoint").GetComponent<TextMesh>();
         hotnessComponent.text = sexyStr;
-        
+
         //Set repair points
         String repairStr = "";
-        if (plumbryStat > 0)
+        if (houseStat > 0f)
             repairStr += "+";
-        repairStr += plumbryStat.ToString();
+        repairStr += ((int)houseStat).ToString();
+        //TextMesh cardRepair = transform.Find("StatsContainer/RepairContener/RepairIcon/RepairPoint").GetComponent<TextMesh>();
+        repairComponent.text = repairStr;
+    }
+
+    public void SetAllData(string n, string q, float hotness, Player.StatType type, float stat, GameObject ip)
+    {
+        name = n;
+        quote = q;
+        sexyStat = hotness;
+        houseType = type;
+        houseStat = stat;
+        //chimneyStat = cs;
+        //plumbryStat = ps;
+        //kitchenStat = ks;
+        //boilerStat  = bs;
+        //sprite = i;
+
+        // Set image
+        //Image cardImage = transform.Find("InCard/CharacterSprite").GetComponent<Image>();
+        imagePrefab = Instantiate(ip, imageParent);
+
+        //Set name
+        //Text cardName = transform.Find("Background/CharacterName").GetComponent<Text>();
+        nameComponent.text = name;
+
+        //Set hotness points
+        String sexyStr = "";
+        if (sexyStat > 0)
+            sexyStr += "+";
+        sexyStr += sexyStat.ToString();
+        //TextMesh cardHotness = transform.Find("StatsContainer/HotnessContener/HotnesIcon/HotnessPoint").GetComponent<TextMesh>();
+        hotnessComponent.text = sexyStr;
+
+        //Set repair points
+        String repairStr = "";
+        if (houseStat > 0f)
+            repairStr += "+";
+        repairStr += ((int)houseStat).ToString();
         //TextMesh cardRepair = transform.Find("StatsContainer/RepairContener/RepairIcon/RepairPoint").GetComponent<TextMesh>();
         repairComponent.text = repairStr;
     }

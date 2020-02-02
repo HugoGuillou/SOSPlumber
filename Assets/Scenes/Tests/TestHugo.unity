@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -249,15 +249,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de5b2216b7c684f45963821950276b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTemperature: 100
-  minTemperature: 0
-  startTemperature: 50
-  tempDecreaseSpeed: 1
-  maxHouseLevel: 100
-  minHouseLevel: 0
-  startHouseLevel: 50
-  tempLevel: 0
-  houseLevel: 0
+  temperatureStat:
+    _StartValue: 0.5
+    _Type: 0
+  chimneyStat:
+    _StartValue: 0.5
+    _Type: 1
+  plumbingStat:
+    _StartValue: 0.5
+    _Type: 2
+  kitchenStat:
+    _StartValue: 0.5
+    _Type: 3
+  boilerStat:
+    _StartValue: 0.5
+    _Type: 4
 --- !u!4 &688992722
 Transform:
   m_ObjectHideFlags: 0
@@ -499,6 +505,8 @@ MonoBehaviour:
   cardPrefab: {fileID: 3319481603175588083, guid: 2ddd4bf76e1d94141962b7e207918b99,
     type: 3}
   deckPlaceHolder: {fileID: 1125163157}
+  DialogBubble: {fileID: 0}
+  bubblePopSpeed: 1
 --- !u!4 &1604825988
 Transform:
   m_ObjectHideFlags: 0
