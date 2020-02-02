@@ -92,7 +92,7 @@ public class Game : MonoBehaviour
         NoRepair,
         None
     }
-    private EndState endState= EndState.None;
+    private EndState endState = EndState.None;
 
     [SerializeField]
     private Transform DoorCard;
@@ -133,13 +133,15 @@ public class Game : MonoBehaviour
         */
         NextCard();
         Player.OnStatChanged += StatsUpdated;
+
+        AudioManager.PlayLoop(AudioManager.Sounds.MenuMusic);
     }
 
 
     public void StatsUpdated(Player.StatType type, float hotness, float oldHotness)
     {
         // SEXYNESS OVERLOAD
-        if(type == Player.StatType.Hotness && hotness == 1)
+        if (type == Player.StatType.Hotness && hotness == 1)
         {
             gameOver = true;
             endState = EndState.Overload;
@@ -179,11 +181,12 @@ public class Game : MonoBehaviour
             AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
             IsMenu = false;
 
-            if (_IsMenu)
+            if (IsMenu)
             {
                 //_MenuUI?.SetActive(false);
                 AudioManager.PlayLoop(AudioManager.Sounds.GameMusic);
-                _IsMenu = false;
+                IsMenu = false;
+                NextCard();
             }
             else
             {
@@ -217,7 +220,7 @@ public class Game : MonoBehaviour
     void GenerateEndCard(EndState end)
     {
         GameObject endCard = new GameObject();
-        string endText=""; 
+        string endText = "";
 
         foreach (Card card in Deck)
         {
@@ -229,7 +232,7 @@ public class Game : MonoBehaviour
         switch (end)
         {
             case EndState.Victory:
-                endCard  = Instantiate(VictoryCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
+                endCard = Instantiate(VictoryCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
                 endText = "Vous avez eu les yeux plus gros que le ventre. Je vous emmène au 7e ciel !";
                 break;
 
@@ -442,12 +445,16 @@ public class Game : MonoBehaviour
         TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
         textMesh.text = Card.current.GetQuote();
 
-        AudioManager.PlaySingleShot(AudioManager.Sounds.NewCharSound);
+        AudioManager.PlaySingleShot(AudioManager.Sounds.DingDongSound, () =>
+        {
+            AudioManager.PlaySingleShot(AudioManager.Sounds.TextSound);
+            AudioManager.PlaySingleShot(AudioManager.Sounds.NewCharSound);
+        });
     }
 
     IEnumerator DrawCardAnim()
     {
-        
+
         Vector3 doorScale = DoorCard.localScale;
         while (DoorCard.localScale.x > 0)
         {
@@ -455,7 +462,7 @@ public class Game : MonoBehaviour
             DoorCard.localScale = doorScale;
             yield return new WaitForEndOfFrame();
         }
-        
+
         DoorCard.gameObject.SetActive(false);
 
         Vector3 currentCardScale = Card.current.transform.localScale;

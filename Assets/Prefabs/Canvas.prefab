@@ -2164,7 +2164,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6536824383371292517}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 33301c42e25516d4b91d6afff27e3e0c, type: 2}
   m_CullingMode: 0
@@ -4180,8 +4180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46b21f83102a06042a2584a314b9cbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _MenuUI: {fileID: 1635882524467324779}
-  _GameUI: {fileID: 6536824383278635965}
   csvFile: {fileID: 4900000, guid: d0e0d989305bd1649b90fae037d1cfb9, type: 3}
   deckSize: 2
   cardPrefab: {fileID: 370837299135294411, guid: 7eb56d02549e29846a474316ef7d4349,
@@ -4189,6 +4187,12 @@ MonoBehaviour:
   deckPlaceHolder: {fileID: 1539785273}
   DialogBubble: {fileID: 6536824383780223504}
   bubblePopSpeed: 3
+  VictoryCard: {fileID: 0}
+  NoRepairCard: {fileID: 0}
+  OverloadCard: {fileID: 0}
+  _MenuUI: {fileID: 1635882524467324779}
+  _DoorUI: {fileID: 6536824383623976399}
+  _GameUI: {fileID: 6536824383278635965}
   DoorCard: {fileID: 0}
 --- !u!1 &6536824383917906000
 GameObject:
@@ -5188,7 +5192,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6536824384501887636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 22f43091025719a46a1efc8ee2bfa14e, type: 2}
   m_CullingMode: 0
