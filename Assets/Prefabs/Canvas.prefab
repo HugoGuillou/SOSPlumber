@@ -467,7 +467,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2443195190605232154
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4181,18 +4181,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvFile: {fileID: 4900000, guid: d0e0d989305bd1649b90fae037d1cfb9, type: 3}
-  deckSize: 2
+  deckSize: 100
   cardPrefab: {fileID: 370837299135294411, guid: 7eb56d02549e29846a474316ef7d4349,
     type: 3}
   deckPlaceHolder: {fileID: 1539785273}
   DialogBubble: {fileID: 6536824383780223504}
   bubblePopSpeed: 3
-  VictoryCard: {fileID: 0}
-  NoRepairCard: {fileID: 0}
-  OverloadCard: {fileID: 0}
+  VictoryCard: {fileID: 7396971316936510645, guid: 7d3c746a4bf8d5a46866eb051384b91d,
+    type: 3}
+  NoRepairCard: {fileID: 2426936263372135162, guid: 73c9287abb361e148af3b8d6819868fe,
+    type: 3}
+  OverloadCard: {fileID: 7667514571668393848, guid: 5657e54a7ea1ce7429dabecda6ce6749,
+    type: 3}
   _MenuUI: {fileID: 1635882524467324779}
   _DoorUI: {fileID: 6536824383623976399}
-  _GameUI: {fileID: 6536824383278635965}
+  _GameUI: {fileID: 4375045753883900385}
   DoorCard: {fileID: 0}
 --- !u!1 &6536824383917906000
 GameObject:
