@@ -109,7 +109,22 @@ public class Player : MonoBehaviour
 
     void CardAccepted(Card card)
     {
-
+        temperatureStat.Value += card.SexyStat;
+        switch (card.HouseType)
+        {
+            case StatType.Chimney:
+                chimneyStat.Value += card.HouseStat;
+                break;
+            case StatType.Plumbing:
+                plumbingStat.Value += card.HouseStat;
+                break;
+            case StatType.Kitchen:
+                kitchenStat.Value += card.HouseStat;
+                break;
+            case StatType.Boiler:
+                boilerStat.Value += card.HouseStat;
+                break;
+        }
     }
 
     void Start()

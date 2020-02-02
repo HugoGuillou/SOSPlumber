@@ -42,7 +42,8 @@ public class Game : MonoBehaviour
     private enum GameState
     {
         DoorClosed,
-        DoorOpen
+        DoorOpen,
+        Swiping
     }
 
     private enum Swipe
@@ -82,7 +83,22 @@ public class Game : MonoBehaviour
         // Prepare our first card
         Card.current = Deck.Dequeue();
 
-        gameState = GameState.DoorClosed;
+        gameState = GameState.DoorOpen;
+
+        Player.OnStatChanged += StatsUpdated;
+    }
+
+
+    public void StatsUpdated(Player.StatType type, float hotness, float oldHotness)
+    {
+        if (hotness > 1)
+            hotness = 1;
+
+        System.Array statTypes = System.Enum.GetValues(typeof(Player.StatType));
+        foreach (Player.StatType statType in statTypes)
+        {
+            
+        }
     }
 
     // Update is called once per frame
@@ -91,6 +107,12 @@ public class Game : MonoBehaviour
 
         Swipe swipeDir = GetSwipe();
 
+        if (swipeDir == Swipe.Left)
+            SwipeLeft();
+        else if (swipeDir == Swipe.Right)
+            SwipeRight();
+
+        /*
         if (gameState == GameState.DoorOpen)
         {
             if (swipeDir == Swipe.Left)
@@ -106,6 +128,7 @@ public class Game : MonoBehaviour
                 StartCoroutine(DrawCardAnim());
             }
         }
+        */
 
     }
 
@@ -159,7 +182,7 @@ public class Game : MonoBehaviour
 
             Vector3 newScale = ourCard.transform.localScale;
             newScale.x = 0;
-            ourCard.transform.localScale = newScale;
+            //ourCard.transform.localScale = newScale;
         }
 
         return ourDeck;
@@ -195,6 +218,8 @@ public class Game : MonoBehaviour
     //https://forum.unity.com/threads/swipe-in-all-directions-touch-and-mouse.165416/
     private Swipe GetSwipe()
     {
+        if (gameState == GameState.Swiping)
+            return Swipe.None;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -243,15 +268,14 @@ public class Game : MonoBehaviour
 
     void SwipeRight()
     {
+        gameState = GameState.Swiping;
         StartCoroutine(sweepRight(Card.current.transform));
-        //currentCard = null;
     }
 
     void SwipeLeft()
     {
+        gameState = GameState.Swiping;
         StartCoroutine(sweepLeft(Card.current.transform));
-        //currentCard = null;
-
     }
 
     void NextCard()
@@ -259,7 +283,7 @@ public class Game : MonoBehaviour
         if (Deck.Count > 0)
             Card.current = Deck.Dequeue();
 
-        gameState = GameState.DoorClosed;
+        gameState = GameState.DoorOpen;
 
         // Pop Dialog Bubble
         //DialogBubble.DOScale(1, 1);
@@ -273,7 +297,7 @@ public class Game : MonoBehaviour
 
     IEnumerator DrawCardAnim()
     {
-
+        
         Vector3 doorScale = DoorCard.localScale;
         while (DoorCard.localScale.x > 0)
         {
@@ -281,7 +305,7 @@ public class Game : MonoBehaviour
             DoorCard.localScale = doorScale;
             yield return new WaitForEndOfFrame();
         }
-
+        
         DoorCard.gameObject.SetActive(false);
 
         Vector3 currentCardScale = Card.current.transform.localScale;
@@ -322,6 +346,7 @@ public class Game : MonoBehaviour
         }
         Card.current.AcceptCard();
         NextCard();
+
         Debug.Log("Card gone");
     }
 

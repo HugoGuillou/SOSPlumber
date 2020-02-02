@@ -34,12 +34,15 @@ public class Card : MonoBehaviour
 
     [SerializeField]
     private float sexyStat;
+    public float SexyStat => sexyStat;
 
     [SerializeField]
     private Player.StatType houseType;
+    public Player.StatType HouseType => houseType;
 
     [SerializeField]
     private float houseStat;
+    public float HouseStat => houseStat;
 
     [SerializeField]
     private GameObject imagePrefab;
@@ -70,12 +73,12 @@ public class Card : MonoBehaviour
 
     public void AcceptCard()
     {
-        OnCardAccepted(this);
+        OnCardAccepted?.Invoke(this);
     }
 
     public void DisCard()
     {
-        OnCardDiscarded(this);
+        OnCardDiscarded?.Invoke(this);
     }
 
     public string GetQuote()

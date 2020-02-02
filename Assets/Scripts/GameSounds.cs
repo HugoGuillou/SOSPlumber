@@ -80,6 +80,20 @@ public class GameSounds : ScriptableObject
     private SoundPool _CardFlipSounds;
     public Sound CardFlipSound => _CardFlipSounds.Pick();
 
+    [Header("Feedback")]
+    [SerializeField]
+    private SoundPool _HotnessUpSounds;
+    public Sound HotnessUpSound => _HotnessUpSounds.Pick();
+    [SerializeField]
+    private SoundPool _HotnessDownSounds;
+    public Sound HotnessDownSound => _HotnessDownSounds.Pick();
+    [SerializeField]
+    private SoundPool _RepairUpSounds;
+    public Sound RepairUpSound => _RepairUpSounds.Pick();
+    [SerializeField]
+    private SoundPool _RepairDownSounds;
+    public Sound RepairDownSound => _RepairDownSounds.Pick();
+
     [Header("Fin")]
     [SerializeField]
     private SoundPool _KinkySounds;

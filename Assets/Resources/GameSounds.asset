@@ -12,12 +12,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc698f5c6e58aab4fb947b58800b5604, type: 3}
   m_Name: GameSounds
   m_EditorClassIdentifier: 
-  _MenuMusic: {fileID: 0}
-  _GameMusic: {fileID: 0}
-  _SwipeSound: {fileID: 0}
-  _AcceptSound: {fileID: 0}
-  _DeclineSound: {fileID: 0}
-  _NewCharSound: {fileID: 8300000, guid: 1bb231db134c7774eaca6dfdff4cdbb8, type: 3}
-  _DingDongSound: {fileID: 0}
-  _TextSound: {fileID: 0}
-  _CardFlipSound: {fileID: 0}
+  _MenuMusics:
+    _Pool:
+    - {fileID: 8300000, guid: 360d1b3dfa2df3243977ab0e7589a70c, type: 3}
+    _Type: 0
+  _GameMusics:
+    _Pool:
+    - {fileID: 8300000, guid: 1086bc0995c28aa4a8af4d77457ac469, type: 3}
+    _Type: 0
+  _SwipeSounds:
+    _Pool:
+    - {fileID: 8300000, guid: 62ec996ae7c99d54aa1854d5d184c7fa, type: 3}
+    - {fileID: 8300000, guid: a33b615109c489a46bf71c14c7cccd92, type: 3}
+    - {fileID: 8300000, guid: 741b4aabea975fd488449829044ad76b, type: 3}
+    _Type: 1
+  _AcceptSounds:
+    _Pool:
+    - {fileID: 0}
+    - {fileID: 0}
+    _Type: 1
+  _DeclineSounds:
+    _Pool:
+    - {fileID: 8300000, guid: c9c9e6827c3d41a4490b3b10cbb94fb4, type: 3}
+    - {fileID: 8300000, guid: f9b00c522df101043a5d1483662f901d, type: 3}
+    - {fileID: 8300000, guid: a57f2ee43324390409e422062f9c2653, type: 3}
+    - {fileID: 8300000, guid: 6e973fa54abc66e48865bf2576c1ee19, type: 3}
+    - {fileID: 8300000, guid: 41580ea1b6e27fc479a82bda7d8e2192, type: 3}
+    - {fileID: 8300000, guid: cf3784e6b822a6145bca67b6bed69adb, type: 3}
+    _Type: 1
+  _TextSounds:
+    _Pool:
+    - {fileID: 8300000, guid: 5a3e9c9f874c05741a230896529d1cab, type: 3}
+    _Type: 2
+  _NewCharSounds:
+    _Pool:
+    - {fileID: 8300000, guid: 79e1559cf198da94397f192e94066856, type: 3}
+    - {fileID: 8300000, guid: 69fbe5d786fca18488c2d26130edab67, type: 3}
+    - {fileID: 8300000, guid: de7854bca0879df458134ebe0d3746a1, type: 3}
+    - {fileID: 8300000, guid: a407eff4c38dedd478e1bbc76b11276f, type: 3}
+    - {fileID: 8300000, guid: 135d374cc32585b428f19e5a39e00528, type: 3}
+    - {fileID: 8300000, guid: bbf6f0e05e9057d4ca392281ff85dc63, type: 3}
+    - {fileID: 8300000, guid: bc8f615f9e67fa54984627fe839b8fba, type: 3}
+    - {fileID: 8300000, guid: e2737a6886f59ab45941ac98faa43db3, type: 3}
+    - {fileID: 8300000, guid: b3b0d5ef55dc1d94bb08147543be9fb9, type: 3}
+    - {fileID: 8300000, guid: 6a53d9cbd6e41fe4291b7700acf78bf5, type: 3}
+    - {fileID: 8300000, guid: e450a385b1041194a99b94daefbb732e, type: 3}
+    - {fileID: 8300000, guid: 02342097126859a4180f8ffbdcfbfc97, type: 3}
+    - {fileID: 8300000, guid: 301f6d5ed0ed2fe4696094058d99891e, type: 3}
+    - {fileID: 8300000, guid: 6d637bc33a884014f9a2e3d3b86c9327, type: 3}
+    - {fileID: 8300000, guid: 1b3b39b1f8208b1439f1156f595d69d4, type: 3}
+    - {fileID: 8300000, guid: 9dc5e57f3f09e9241950f8ac6954a9ec, type: 3}
+    _Type: 2
+  _DingDongSounds:
+    _Pool:
+    - {fileID: 8300000, guid: b661172a532b59046bab0da21e2e18fa, type: 3}
+    - {fileID: 8300000, guid: 26180c5ac09b1744cb89fce9bdeb5509, type: 3}
+    _Type: 2
+  _CardFlipSounds:
+    _Pool:
+    - {fileID: 8300000, guid: 20be912bd1656794d8a6f690d79365e4, type: 3}
+    _Type: 2
+  _HotnessUpSounds:
+    _Pool: []
+    _Type: 3
+  _HotnessDownSounds:
+    _Pool: []
+    _Type: 3
+  _RepairUpSounds:
+    _Pool: []
+    _Type: 3
+  _RepairDownSounds:
+    _Pool: []
+    _Type: 3
+  _KinkySounds:
+    _Pool:
+    - {fileID: 8300000, guid: dded3003ce88f1f4a833b44bd498ac55, type: 3}
+    - {fileID: 8300000, guid: 276e0ba7ba8bac74cab8dcf0303dd10c, type: 3}
+    _Type: 4
+  _PerfectSounds:
+    _Pool:
+    - {fileID: 8300000, guid: c2db5f539254142418b8007054a413d0, type: 3}
+    _Type: 4
+  _AlmostSounds:
+    _Pool:
+    - {fileID: 8300000, guid: 2746ab32c7a41654b9342652e4ce6915, type: 3}
+    - {fileID: 8300000, guid: 1f84d7c4751bd924fa6e3595bae77001, type: 3}
+    _Type: 4
