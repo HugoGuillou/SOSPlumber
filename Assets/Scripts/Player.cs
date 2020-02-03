@@ -122,8 +122,17 @@ public class Player : MonoBehaviour {
 				break;
 		}
 
+        if(card.HouseStat > 0)
+            AudioManager.PlaySingleShot(AudioManager.Sounds.RepairUpSound);
+        else if(card.HouseStat < 0)
+            AudioManager.PlaySingleShot(AudioManager.Sounds.RepairDownSound);
 
-		if (!Mathf.Approximately (0f, card.HouseStat)) {
+        if (card.SexyStat > 0)
+            AudioManager.PlaySingleShot(AudioManager.Sounds.HotnessUpSound);
+        else if (card.HouseStat < 0)
+            AudioManager.PlaySingleShot(AudioManager.Sounds.HotnessDownSound);
+
+        if (!Mathf.Approximately (0f, card.HouseStat)) {
 			if (!Mathf.Approximately (0f, card.SexyStat)) {
 				AudioManager.PlaySingleShot ((card.HouseStat < 0f) ? AudioManager.Sounds.RepairDownSound : AudioManager.Sounds.RepairUpSound, () => {
 					AudioManager.PlaySingleShot ((card.SexyStat < 0f) ? AudioManager.Sounds.HotnessDownSound : AudioManager.Sounds.HotnessUpSound);

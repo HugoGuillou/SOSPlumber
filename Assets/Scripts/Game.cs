@@ -145,6 +145,8 @@ public class Game : MonoBehaviour
             gameOver = true;
             endState = EndState.Overload;
 
+            AudioManager.PlaySingleShot(AudioManager.Sounds.KinkySound);
+
             GenerateEndCard(endState);
 
             Debug.Log("Perdu !");
@@ -160,9 +162,15 @@ public class Game : MonoBehaviour
         float totalRepair = Player.ChimneyStat.Value + Player.PlumbingStat.Value + Player.KitchenStat.Value + Player.BoilerStat.Value;
 
         if (totalRepair == 4)
+        {
             endState = EndState.Victory;
+            AudioManager.PlaySingleShot(AudioManager.Sounds.PerfectSound);
+        }
         else
+        {
             endState = EndState.NoRepair;
+            AudioManager.PlaySingleShot(AudioManager.Sounds.AlmostSound);
+        }
 
         GenerateEndCard(endState);
 
