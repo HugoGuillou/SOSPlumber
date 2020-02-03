@@ -54,13 +54,12 @@ public class AudioManager : MonoBehaviour
 
     public static void PlayLoop(GameSounds.Sound sound)
     {
-        Debug.Log(sound.Type);
         if (sound.Type == GameSounds.SoundType.Music)
         {
             if (_CurrentMusicSource != null)
-                instance.StartCoroutine(instance.FadeOut(PlaySound(sound, false, null, null), _CurrentMusicSource, 2f));
+                instance.StartCoroutine(instance.FadeOut(PlaySound(sound, true, null, null), _CurrentMusicSource, 2f));
             else
-                _CurrentMusicSource = PlaySound(sound, false, null, null);
+                _CurrentMusicSource = PlaySound(sound, true, null, null);
         }
     }
 
