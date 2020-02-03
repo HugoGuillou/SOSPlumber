@@ -159,7 +159,7 @@ public class Game : MonoBehaviour
 
         float totalRepair = Player.ChimneyStat.Value + Player.PlumbingStat.Value + Player.KitchenStat.Value + Player.BoilerStat.Value;
 
-        if (totalRepair == 1)
+        if (totalRepair == 4)
             endState = EndState.Victory;
         else
             endState = EndState.NoRepair;
@@ -228,7 +228,7 @@ public class Game : MonoBehaviour
         {
             case EndState.Victory:
                 endCard = Instantiate(VictoryCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
-                endText = "Vous avez eu les yeux plus gros que le ventre. Je vous emmène au 7e ciel !";
+                endText = "Joindre l'utile à l'agréable, vous savez faire ! Un corps sain dans une maison neuve.";
                 break;
 
             case EndState.NoRepair:
@@ -494,6 +494,7 @@ public class Game : MonoBehaviour
     IEnumerator sweepRight(Transform tr)
     {
         Card.current.AcceptCard();
+        NextCard();
 
         while (tr.localPosition.x <= 600)
         {
@@ -501,13 +502,13 @@ public class Game : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        NextCard();
         Debug.Log("Card gone");
     }
 
     IEnumerator sweepLeft(Transform tr)
     {
         Card.current.DisCard();
+        NextCard();
 
         while (tr.localPosition.x >= -600)
         {
@@ -515,7 +516,6 @@ public class Game : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        NextCard();
         Debug.Log("Card gone");
     }
 }

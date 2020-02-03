@@ -64,7 +64,6 @@ public class HouseUI : MonoBehaviour
         if (image == null)
             return;
 
-        Debug.LogFormat("{0} : {1}", type, newValue);
         SetValue(image, newValue);
     }
 
