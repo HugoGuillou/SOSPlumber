@@ -63,7 +63,7 @@ public class Game : MonoBehaviour
             if (_IsMenu == value)
                 return;
             _MenuUI.SetActive(value);
-            _DoorUI.SetActive(value);
+            //_DoorUI.SetActive(value);
             _GameUI.SetActive(!value);
             _IsMenu = value;
         }
@@ -95,7 +95,7 @@ public class Game : MonoBehaviour
     private EndState endState = EndState.None;
 
     [SerializeField]
-    private Transform DoorCard;
+    private Card DoorCard;
 
     private bool gameOver = false;
 
@@ -183,13 +183,12 @@ public class Game : MonoBehaviour
                 IsMenu = false;
                 NextCard();
             }
-            else
-            {
-                if (swipeDir == Swipe.Left)
-                    SwipeLeft();
-                else if (swipeDir == Swipe.Right)
-                    SwipeRight();
-            }
+
+            if (swipeDir == Swipe.Left)
+                SwipeLeft();
+            else if (swipeDir == Swipe.Right)
+                SwipeRight();
+            
         }
 
         /*
@@ -229,6 +228,7 @@ public class Game : MonoBehaviour
             case EndState.Victory:
                 endCard = Instantiate(VictoryCard, deckPlaceHolder.position, Quaternion.identity, deckPlaceHolder);
                 endText = "Joindre l'utile à l'agréable, vous savez faire ! Un corps sain dans une maison neuve.";
+                endText = "Joindre l'utile à l'agréable, vous savez faire ! Un corps sain dans une maison neuve.";
                 break;
 
             case EndState.NoRepair:
@@ -252,6 +252,8 @@ public class Game : MonoBehaviour
     Queue<Card> GenerateDeck(int size)
     {
         Queue<Card> ourDeck = new Queue<Card>();
+
+        ourDeck.Enqueue(DoorCard);
 
         for (int i = 0; i < size; i++)
         {
@@ -323,7 +325,9 @@ public class Game : MonoBehaviour
 
             Vector3 newScale = ourCard.transform.localScale;
             newScale.x = 0;
-            //ourCard.transform.localScale = newScale;
+
+            DoorCard.transform.SetAsLastSibling();
+
         }
 
         return ourDeck;
@@ -451,7 +455,7 @@ public class Game : MonoBehaviour
 
     IEnumerator DrawCardAnim()
     {
-
+        /*
         Vector3 doorScale = DoorCard.localScale;
         while (DoorCard.localScale.x > 0)
         {
@@ -461,7 +465,7 @@ public class Game : MonoBehaviour
         }
 
         DoorCard.gameObject.SetActive(false);
-
+        */
         Vector3 currentCardScale = Card.current.transform.localScale;
         while (Card.current.transform.localScale.x < 1)
         {
@@ -514,6 +518,17 @@ public class Game : MonoBehaviour
         {
             tr.Translate(Vector3.left * 500f * Time.deltaTime);
             yield return new WaitForEndOfFrame();
+        }
+
+        if (tr.GetComponent<Card>().isDoorCard)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBPLAYER
+            Application.OpenURL(webplayerQuitURL);
+#else
+            Application.Quit();
+#endif
         }
 
         Debug.Log("Card gone");
