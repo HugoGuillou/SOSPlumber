@@ -18,13 +18,13 @@ MonoBehaviour:
     - "Coucou, j'ai amen\xE9 mes <b>gros outils</b>"
     - "Vous avez des probl\xE8mes de tuyauterie ?"
     - Je viens <i>tondre le gazon.</i>
-    - <b><red>Fait chaud chez vous dites-donc...</b></red>
+    - <b>Fait <color="red">chaud </color>chez vous dites-donc...</color></b>
     - "<s>C'est qui</s>... euh... <u>c'est o\xF9</u> la chaudi\xE8re ?"
     - Et c'est pour qui la vidange ?
     - "On dirait bien que y a une fuite l\xE0 !"
-    - On doit <cspace=1em>tout</cspace> retapisser.
+    - On doit <cspace=0.4em>tout</cspace> retapisser.
     - J'y passe un coup de ponceuse ?
-    - Faites-moins bruit ou j'appelle la <font="gunplaySDF">police</font> !
+    - Faites-moins bruit ou j'appelle la <b>POLICE</b> !
     - <b><uppercase>J'APPORTE LA FIBRE TRES GROS DEBIT !!!</uppercase></b>
     - "On vous ramone la chemin\xE9e ?"
     - "C'est que y a de <b><color=\"yellow\">l'\xE9lectricit\xE9</b></color> dans
@@ -38,16 +38,16 @@ MonoBehaviour:
     - Vous me faites entrer ? J'ai du <cspace=1em>bon matos</cspace>.
     - "Oui. Oui. J'astique bien tout \xE0 fond."
     - Allez on s'y met tout de suite ?
-    - "Je viens pour <uppercase>d\xE9monter</uppercase>la cloison."
+    - Je viens pour DEMONTER la cloison.
     - Laissez faire les professionnels.
     - <size=100%>C'est pour<size=80%> votre paquet. <size=60%>Une petite <size=40%>signature?<size=100%>
-    - "<i>*Roule des m\xE9caniques*</i>"
+    - "*roule des m\xE9caniques*"
     - Pardon, je vous ai fait attendre.
     - "Alors, on refait la d\xE9co ?"
     - Vous habitez chez vos parents ?
     - "Un calendrier des pompiers, \xE7a vous chauffe ?"
     - AvEz-vous dEja eNteNdu ParleR de nOtre SeIgneuR ?
-    - "Vous allez voir:<space=5em> \xE7a d\xE9m\xE9nage!"
+    - "Vous allez voir:<space=3em> \xE7a d\xE9m\xE9nage!"
     - Vous avez pas l'impression d'enfoncer des portes ouvertes parfoisis ?
     - Avez vous essayer de l'eteindre et de la rallumer ?
   _BonusSexAppealPool:
