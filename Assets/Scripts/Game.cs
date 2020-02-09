@@ -24,6 +24,12 @@ public class Game : MonoBehaviour
     private int deckSize = 20;
 
     [SerializeField]
+    private float flipSpeed = 200;
+
+    [SerializeField]
+    private float sweepSpeed = 100;
+
+    [SerializeField]
     private GameObject cardPrefab;
 
     [SerializeField]
@@ -125,15 +131,13 @@ public class Game : MonoBehaviour
 
         Deck = GenerateDeck(deckSize);
 
-        /*
-        // Prepare our first card
-        Card.current = Deck.Dequeue();
+        gameState = GameState.DoorClosed;
 
-        gameState = GameState.DoorOpen;
-        */
         Player.OnStatChanged += StatsUpdated;
 
         AudioManager.PlayLoop(AudioManager.Sounds.MenuMusic);
+
+        Card.current = Deck.Dequeue();
     }
 
 
@@ -148,6 +152,7 @@ public class Game : MonoBehaviour
             AudioManager.PlaySingleShot(AudioManager.Sounds.KinkySound);
 
             GenerateEndCard(endState);
+            
 
             Debug.Log("Perdu !");
 
@@ -183,6 +188,27 @@ public class Game : MonoBehaviour
 
         Swipe swipeDir = GetSwipe();
 
+        if (swipeDir == Swipe.None)
+            return;
+
+        switch (gameState)
+        {
+            case GameState.DoorClosed:
+                FlipCard(Card.current);
+                break;
+
+            case GameState.DoorOpen:
+                if (swipeDir == Swipe.Left)
+                    SwipeLeft();
+                else if (swipeDir == Swipe.Right)
+                    SwipeRight();
+                break;
+
+            default:
+                break;
+        }
+
+        /*
         if (swipeDir != Swipe.None)
         {
             if (IsMenu)
@@ -198,6 +224,7 @@ public class Game : MonoBehaviour
                 SwipeRight();
             
         }
+        */
 
         /*
         if (gameState == GameState.DoorOpen)
@@ -217,6 +244,42 @@ public class Game : MonoBehaviour
         }
         */
 
+    }
+
+    void FlipCard(Card card)
+    {
+        StartCoroutine(FlipCardAnim(card));
+    }
+
+    IEnumerator FlipCardAnim(Card card)
+    {
+        Transform tr = card.transform;
+        while(tr.localScale.x > 0)
+        {
+            //Vector3 newRot = Vector3.up * flipSpeed * Time.deltaTime;
+            //tr.Rotate(newRot);
+            Debug.Log(tr.localScale);
+            tr.localScale += Vector3.one * 0.005f - Vector3.right * 0.02f;
+            yield return new WaitForEndOfFrame();
+
+        }
+        card.FlipTexture();
+
+        while (tr.localScale.x < 0.8)
+        {
+            //Vector3 newRot = Vector3.up * flipSpeed * Time.deltaTime;
+            //tr.Rotate(newRot);
+            //Debug.Log(tr.eulerAngles.y);
+            tr.localScale += Vector3.right * 0.02f - Vector3.one * 0.005f;
+            yield return new WaitForEndOfFrame();
+
+        }
+
+        gameState = GameState.DoorOpen;
+        DialogBubble.GetComponent<Animator>().SetTrigger("Show");
+        //Set Quote Text
+        TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
+        textMesh.text = Card.current.GetQuote();
     }
 
     void GenerateEndCard(EndState end)
@@ -254,14 +317,16 @@ public class Game : MonoBehaviour
         }
 
         endCard.transform.SetAsFirstSibling();
+        endCard.transform.rotation = Quaternion.Euler(0, 0, 0);
         textMesh.text = endText;
+        DialogBubble.GetComponent<Animator>().SetTrigger("Show");
     }
 
     Queue<Card> GenerateDeck(int size)
     {
         Queue<Card> ourDeck = new Queue<Card>();
 
-        ourDeck.Enqueue(DoorCard);
+        //ourDeck.Enqueue(DoorCard);
 
         for (int i = 0; i < size; i++)
         {
@@ -334,7 +399,7 @@ public class Game : MonoBehaviour
             Vector3 newScale = ourCard.transform.localScale;
             newScale.x = 0;
 
-            DoorCard.transform.SetAsLastSibling();
+            //DoorCard.transform.SetAsLastSibling();
 
         }
 
@@ -421,14 +486,20 @@ public class Game : MonoBehaviour
     {
         gameState = GameState.Swiping;
         if (Card.current != null)
-            StartCoroutine(sweepRight(Card.current.transform));
+        {
+            DialogBubble.GetComponent<Animator>().SetTrigger("Hide");
+            StartCoroutine(sweepRightAnim(Card.current.transform));
+        }
     }
 
     void SwipeLeft()
     {
         gameState = GameState.Swiping;
         if (Card.current != null)
-            StartCoroutine(sweepLeft(Card.current.transform));
+        {
+            DialogBubble.GetComponent<Animator>().SetTrigger("Hide");
+            StartCoroutine(sweepLeftAnim(Card.current.transform));
+        }
     }
 
     void NextCard()
@@ -444,15 +515,12 @@ public class Game : MonoBehaviour
 
         Card.current = Deck.Dequeue();
 
-        gameState = GameState.DoorOpen;
+
+        gameState = GameState.DoorClosed;
 
         // Pop Dialog Bubble
         //DialogBubble.DOScale(1, 1);
-        StartCoroutine(PopBubble());
-
-        //Set Quote Text
-        TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
-        textMesh.text = Card.current.GetQuote();
+        //StartCoroutine(PopBubble());
 
         AudioManager.PlaySingleShot(AudioManager.Sounds.DingDongSound, () =>
         {
@@ -503,28 +571,31 @@ public class Game : MonoBehaviour
     }
 
 
-    IEnumerator sweepRight(Transform tr)
+    IEnumerator sweepRightAnim(Transform tr)
     {
         Card.current.AcceptCard();
         NextCard();
 
         while (tr.localPosition.x <= 600)
         {
-            tr.Translate(Vector3.right * 500f * Time.deltaTime);
+            tr.Translate(Vector3.right * sweepSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
         Debug.Log("Card gone");
+
+        gameState = GameState.DoorClosed;
+
     }
 
-    IEnumerator sweepLeft(Transform tr)
+    IEnumerator sweepLeftAnim(Transform tr)
     {
         Card.current.DisCard();
         NextCard();
 
         while (tr.localPosition.x >= -600)
         {
-            tr.Translate(Vector3.left * 500f * Time.deltaTime);
+            tr.Translate(Vector3.left * sweepSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
 
@@ -538,6 +609,8 @@ public class Game : MonoBehaviour
             Application.Quit();
 #endif
         }
+
+        gameState = GameState.DoorClosed;
 
         Debug.Log("Card gone");
     }

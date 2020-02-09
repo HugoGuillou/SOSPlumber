@@ -319,7 +319,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 8.25e-43, y: 1.16e-43, z: 0, w: 2.517229}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -491,12 +491,37 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 384453742, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
       propertyPath: deckSize
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 384453742, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
       propertyPath: DoorCard
       value: 
       objectReference: {fileID: 1966675743}
+    - target: {fileID: 384453742, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
+      propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 370837299135294411, guid: 178fc66bdb8af504c9d68715c254ee8f,
+        type: 3}
+    - target: {fileID: 384453742, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
+      propertyPath: flipSpeed
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539785273, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539785273, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539785273, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539785273, guid: b90fa12ccfa993040979f79f0cd19e0f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1923953606656139229, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -667,6 +692,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6536824383278635965, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6536824383383908582, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -726,12 +756,62 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383511298529, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 1962934271
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383623976399, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383639079321, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383639079321, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383639079321, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383639079321, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383639079321, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383639079321, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6536824383780223508, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6536824383893377905, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6536824383893377906, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 6536824383893377909, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -852,6 +932,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6536824384172187196, guid: b90fa12ccfa993040979f79f0cd19e0f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 6536824384683430833, guid: b90fa12ccfa993040979f79f0cd19e0f,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -954,3 +1039,5 @@ MonoBehaviour:
   repairComponent: {fileID: 0}
   repairIcon: {fileID: 0}
   isDoorCard: 1
+  rectoCard: {fileID: 0}
+  versoCard: {fileID: 0}

@@ -64,9 +64,22 @@ public class Card : MonoBehaviour
 
     public bool isDoorCard = false;
 
+    [SerializeField]
+    private RectTransform rectoCard;
+
+    [SerializeField]
+    private RectTransform versoCard;
+
     // Start is called before the first frame update
     void Start()
     {
+
+        // Card start on verso
+
+        rectoCard.gameObject.SetActive(false);
+        versoCard.gameObject.SetActive(true);
+
+        //transform.rotation = Quaternion.Euler(0, 180, 0);
 
     }
 
@@ -91,6 +104,12 @@ public class Card : MonoBehaviour
     public string GetQuote()
     {
         return quote;
+    }
+
+    public void FlipTexture()
+    {
+        rectoCard.gameObject.SetActive(true);
+        versoCard.gameObject.SetActive(false);
     }
 
     public void SetAllData(string n, string q, int s, int cs, int ps, int ks, int bs, GameObject ip)
