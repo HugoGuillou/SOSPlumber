@@ -92,13 +92,13 @@ public class Card : MonoBehaviour
     public void AcceptCard()
     {
         OnCardAccepted?.Invoke(this);
-        AudioManager.PlaySingleShot(AudioManager.Sounds.AcceptSound);
+       // AudioManager.PlaySingleShot(AudioManager.Sounds.AcceptSound);
     }
 
     public void DisCard()
     {
         OnCardDiscarded?.Invoke(this);
-        AudioManager.PlaySingleShot(AudioManager.Sounds.DeclineSound);
+        //AudioManager.PlaySingleShot(AudioManager.Sounds.DeclineSound);
     }
 
     public string GetQuote()

@@ -149,7 +149,7 @@ public class Game : MonoBehaviour
             gameOver = true;
             endState = EndState.Overload;
 
-            AudioManager.PlaySingleShot(AudioManager.Sounds.KinkySound);
+            //AudioManager.PlaySingleShot(AudioManager.Sounds.KinkySound);
 
             GenerateEndCard(endState);
             
@@ -277,6 +277,7 @@ public class Game : MonoBehaviour
 
         gameState = GameState.DoorOpen;
         DialogBubble.GetComponent<Animator>().SetTrigger("Show");
+        AudioManager.PlaySingleShot(AudioManager.Sounds.TextSound);
         //Set Quote Text
         TextMeshProUGUI textMesh = DialogBubble.GetComponentInChildren<TextMeshProUGUI>();
         textMesh.text = Card.current.GetQuote();
@@ -488,6 +489,7 @@ public class Game : MonoBehaviour
         if (Card.current != null)
         {
             DialogBubble.GetComponent<Animator>().SetTrigger("Hide");
+            AudioManager.PlaySingleShot(AudioManager.Sounds.SwipeSound);
             StartCoroutine(sweepRightAnim(Card.current.transform));
         }
     }
@@ -498,6 +500,7 @@ public class Game : MonoBehaviour
         if (Card.current != null)
         {
             DialogBubble.GetComponent<Animator>().SetTrigger("Hide");
+            AudioManager.PlaySingleShot(AudioManager.Sounds.SwipeSound);
             StartCoroutine(sweepLeftAnim(Card.current.transform));
         }
     }
@@ -515,18 +518,20 @@ public class Game : MonoBehaviour
 
         Card.current = Deck.Dequeue();
 
-
         gameState = GameState.DoorClosed;
 
         // Pop Dialog Bubble
         //DialogBubble.DOScale(1, 1);
         //StartCoroutine(PopBubble());
 
+        /*
         AudioManager.PlaySingleShot(AudioManager.Sounds.DingDongSound, () =>
         {
             AudioManager.PlaySingleShot(AudioManager.Sounds.TextSound);
             AudioManager.PlaySingleShot(AudioManager.Sounds.NewCharSound);
         });
+        */
+        AudioManager.PlaySingleShot(AudioManager.Sounds.NewCharSound);
     }
 
     IEnumerator DrawCardAnim()
@@ -585,6 +590,7 @@ public class Game : MonoBehaviour
         Debug.Log("Card gone");
 
         gameState = GameState.DoorClosed;
+        AudioManager.PlaySingleShot(AudioManager.Sounds.DingDongSound);
 
     }
 
@@ -611,6 +617,7 @@ public class Game : MonoBehaviour
         }
 
         gameState = GameState.DoorClosed;
+        AudioManager.PlaySingleShot(AudioManager.Sounds.DingDongSound);
 
         Debug.Log("Card gone");
     }
